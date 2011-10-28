@@ -1,11 +1,15 @@
 package com.sanisidro.to;
 
-import java.io.Serializable;
-
-public class ZoneTO implements Serializable{
+public class ZoneTO {
 
 	private long id;
 	private String name;
+	
+	private boolean editable;
+	
+	public ZoneTO() {
+		editable = false;
+	}
 
 	public long getId() {
 		return id;
@@ -18,5 +22,11 @@ public class ZoneTO implements Serializable{
 	}
 	public void setName(String zoneName) {
 		this.name = zoneName;
+	}
+	public boolean isEditable() {
+		return editable;
+	}
+	public void setEditable(boolean editable) {
+		this.editable = editable;
 	}
 }

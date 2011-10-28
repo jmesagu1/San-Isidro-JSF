@@ -1,6 +1,9 @@
 package com.sanisidro.manager;
 
-import com.sanisidro.service.DataService;
+import java.util.List;
+
+import com.sanisidro.service.CRUDService;
+import com.sanisidro.service.ZoneService;
 import com.sanisidro.to.ZoneTO;
 
 public class ZoneManager {
@@ -11,7 +14,7 @@ public class ZoneManager {
 	{
 		try 
 		{
-			return (ZoneTO) new DataService().create(DATA_SERVICE, zone);
+			return (ZoneTO) new CRUDService().create(DATA_SERVICE, zone);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -21,6 +24,16 @@ public class ZoneManager {
 	}
 	
 	public boolean updateZone(ZoneTO zone) {
-		return new DataService().update(DATA_SERVICE, zone);
+		return new CRUDService().update(DATA_SERVICE, zone);
+	}
+	
+	public List<ZoneTO> getAllZones() {
+		try {
+			return new ZoneService().getAllZones();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
