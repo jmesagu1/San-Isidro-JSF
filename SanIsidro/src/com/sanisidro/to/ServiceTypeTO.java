@@ -1,25 +1,16 @@
-package com.sanisidro.entity;
+package com.sanisidro.to;
 
-import java.io.Serializable;
-import java.lang.String;
-import javax.persistence.*;
-
-/**
- * Entity implementation class for Entity: ServiceType
- *
- */
-@Entity
-@Table(name="Service_Type")
-
-public class ServiceType implements Serializable {
-
-	   
-	@Id
+public class ServiceTypeTO {
 	private long id;
 	private String detail;
-	@Column(name = "Has_Meter")
 	private boolean hasMeter;
  
+	private boolean editable;
+	
+	public ServiceTypeTO() {
+		editable = false;
+	}
+
 	public long getId() {
 		return this.id;
 	}
@@ -37,5 +28,11 @@ public class ServiceType implements Serializable {
 	}
 	public void setHasMeter(boolean hasMeter) {
 		this.hasMeter = hasMeter;
+	}
+	public boolean isEditable() {
+		return editable;
+	}
+	public void setEditable(boolean editable) {
+		this.editable = editable;
 	}
 }

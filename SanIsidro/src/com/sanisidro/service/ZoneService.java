@@ -33,7 +33,6 @@ public class ZoneService implements IService{
 		if (zone != null) {
 			zone.setName(zoneTO.getName());
 		}
-		zone.setName(zoneTO.getName());
 		em.getTransaction().commit();
 	}
 
@@ -43,7 +42,8 @@ public class ZoneService implements IService{
 		em.getTransaction().begin();
 		Zone zone = em.find(Zone.class, zoneTO.getId());
 		if (zone != null) {
-			return zone;
+			zoneTO.setName(zone.getName());
+			return zoneTO;
 		} else {
 			return null;
 		}
