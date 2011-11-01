@@ -26,14 +26,17 @@ public class ZoneService implements IService{
 	}
 
 	@Override
-	public void update(Object obj, EntityManager em) {
+	public boolean update(Object obj, EntityManager em) {
+		boolean result = false;
 		ZoneTO zoneTO = (ZoneTO) obj;
 		em.getTransaction().begin();
 		Zone zone = em.find(Zone.class, zoneTO.getId());
 		if (zone != null) {
 			zone.setName(zoneTO.getName());
+			result = true;
 		}
 		em.getTransaction().commit();
+		return result;
 	}
 
 	@Override

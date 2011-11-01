@@ -17,12 +17,7 @@ public class AdminServiceTypeMB {
 	
 	public AdminServiceTypeMB() {
 		editId = -1;
-		List<ServiceTypeTO> tmp = new SanIsidroWrapper().getAllServiceTypes();
-		if (tmp != null) {
-			serviceTypes = tmp;
-		} else {
-			message = "Error consultando tipos de servicio";
-		}
+		refreshList();
 	}
 
 	public boolean isHasMeter() {
@@ -64,7 +59,7 @@ public class AdminServiceTypeMB {
 		this.serviceTypeTmp = serviceTypeTmp;
 	}
 
-	public String createZone()
+	public String createServiceType()
 	{
 		if (!detail.trim().equals("")) {
 			ServiceTypeTO to = new ServiceTypeTO();
@@ -74,6 +69,7 @@ public class AdminServiceTypeMB {
 			to = wrapper.createServiceType(to);
 			if (to.getId() != -1)
 			{
+				refreshList();
 				message = "Tipo de Servicio registrado exitosamente";
 				return "success";
 			}
@@ -104,7 +100,7 @@ public class AdminServiceTypeMB {
 		return "";
 	}
 	
-	public String updateZone() {
+	public String updateServiceType() {
 		if (!serviceTypeTmp.getDetail().trim().equals("")) {
 			SanIsidroWrapper wrapper = new SanIsidroWrapper();
 			if (wrapper.updateServiceType(serviceTypeTmp))
@@ -122,6 +118,16 @@ public class AdminServiceTypeMB {
 		else {
 			message = "Debe ingresar un nombre para el Tipo de Servicio";
 			return "failure";
+		}
+	}
+	
+	public void refreshList()
+	{
+		List<ServiceTypeTO> tmp = new SanIsidroWrapper().getAllServiceTypes();
+		if (tmp != null) {
+			serviceTypes = tmp;
+		} else {
+			message = "Error consultando tipos de servicio";
 		}
 	}
 }

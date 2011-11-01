@@ -16,37 +16,39 @@
 <body>
 <f:view>
 <h:form id="form">
-	<h:inputHidden id="editId"/>
+	<h:inputHidden id="editId" value="#{serviceTypeMB.editId}"/>
 	<h:panelGrid border="1" columns="2">
 		<h:outputText value="Tipo de Servicio" />
-		<h:inputText value=""/>
+		<h:inputText value="#{serviceTypeMB.detail}"/>
 		<h:outputText value="¿Con Contador?" />
-		<h:inputText value=""/>
+		<h:selectOneMenu value="#{serviceTypeMB.hasMeter}">
+			<f:selectItem itemLabel="Si" itemValue="true"/>
+			<f:selectItem itemLabel="No" itemValue="false"/>
+		</h:selectOneMenu>
 		<h:outputText value=""></h:outputText>
-		<h:commandButton value="Registrar"/>
+		<h:commandButton value="Registrar" action="#{serviceTypeMB.createServiceType}"/>
 	</h:panelGrid>
-	<h:outputText style="color:red;" value=""/>
-	<h:dataTable border="1" value="" var="">
+	<h:outputText style="color:red;" value="#{serviceTypeMB.message}"/>
+	<h:dataTable border="1" value="#{serviceTypeMB.serviceTypes}" var="type">
 		<h:column>
 			<f:facet name="header">
 				<h:outputText value="Tipo de Servicio"></h:outputText>
 			</f:facet>
-			<h:outputText/>
-			<h:inputText/>
+			<h:outputText value="#{type.detail}" rendered="#{not type.editable}"/>
+			<h:inputText value="#{type.detail}" rendered="#{type.editable}"/>
 		</h:column>
 		<h:column>
 			<f:facet name="header">
 				<h:outputText value="Tiene Contador"></h:outputText>
 			</f:facet>
-			<h:outputText/>
-			<h:inputText/>
+			<h:selectBooleanCheckbox value="#{type.hasMeter}" readonly="#{not type.editable}"/>
 		</h:column>
 		<h:column>
 			<f:facet name="header">
 				<h:outputText value="Acción"></h:outputText>
 			</f:facet>
-			<h:commandLink value="Editar"/>
-			<h:commandLink value="Guardar"/>
+			<h:commandLink onclick="setEditId(#{type.id});" value="Editar" action="#{serviceTypeMB.setEditable}" rendered="#{not type.editable}"/>
+			<h:commandLink value="Guardar" action="#{serviceTypeMB.updateServiceType}" rendered="#{type.editable}"/>
 		</h:column>
 	</h:dataTable>
 	</h:form>

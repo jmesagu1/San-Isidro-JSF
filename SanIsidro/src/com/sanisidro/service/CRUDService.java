@@ -35,9 +35,9 @@ public class CRUDService {
 	    try {
 	        IService ds = loadDataService(dataServiceClass);
 	        em = emf.createEntityManager();
-	        ds.update(object, em);
-	        result = true;
+	        result = ds.update(object, em);
 	    } catch (Exception e) {
+	    	result = false;
 	        e.printStackTrace();
 	    } finally {
 	    	if (em != null) {

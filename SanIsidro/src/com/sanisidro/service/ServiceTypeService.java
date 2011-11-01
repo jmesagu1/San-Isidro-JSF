@@ -27,15 +27,18 @@ public class ServiceTypeService implements IService
 	}
 
 	@Override
-	public void update(Object obj, EntityManager em) {
+	public boolean update(Object obj, EntityManager em) {
+		boolean result = false;
 		ServiceTypeTO to = (ServiceTypeTO) obj;
 		em.getTransaction().begin();
 		ServiceType serviceType = em.find(ServiceType.class, to.getId());
 		if (serviceType != null) {
 			serviceType.setDetail(to.getDetail());
 			serviceType.setHasMeter(to.getHasMeter());
+			result = true;
 		}
 		em.getTransaction().commit();
+		return result;
 	}
 
 	@Override
@@ -61,6 +64,7 @@ public class ServiceTypeService implements IService
         List<ServiceTypeTO> result = new ArrayList<ServiceTypeTO>();
         for (ServiceType serviceType : rs) {
         	ServiceTypeTO to = new ServiceTypeTO();
+        	to.setId(serviceType.getId());
 			to.setDetail(serviceType.getDetail());
 			to.setHasMeter(serviceType.getHasMeter());
 			result.add(to);

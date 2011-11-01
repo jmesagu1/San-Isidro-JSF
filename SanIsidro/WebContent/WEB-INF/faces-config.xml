@@ -11,8 +11,8 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
-		<managed-bean-name>ejemploMB</managed-bean-name>
-		<managed-bean-class>com.sanisidro.bean.EjemploMB</managed-bean-class>
+		<managed-bean-name>serviceTypeMB</managed-bean-name>
+		<managed-bean-class>com.sanisidro.bean.AdminServiceTypeMB</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 
