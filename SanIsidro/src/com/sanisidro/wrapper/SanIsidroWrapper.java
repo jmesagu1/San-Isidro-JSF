@@ -3,8 +3,10 @@ package com.sanisidro.wrapper;
 import java.util.List;
 
 import com.sanisidro.manager.ServiceTypeManager;
+import com.sanisidro.manager.UserTypeManager;
 import com.sanisidro.manager.ZoneManager;
 import com.sanisidro.to.ServiceTypeTO;
+import com.sanisidro.to.UserTypeTO;
 import com.sanisidro.to.ZoneTO;
 
 public class SanIsidroWrapper {
@@ -31,5 +33,17 @@ public class SanIsidroWrapper {
 	
 	public List<ServiceTypeTO> getAllServiceTypes() {
 		return new ServiceTypeManager().getAllServiceTypes();
+	}
+	
+	public UserTypeTO createUserType(UserTypeTO userType) {
+		return new UserTypeManager().createUserType(userType);
+	}
+	
+	public boolean updateUserType(UserTypeTO userType) {
+		return new UserTypeManager().updateUserType(userType);
+	}
+	
+	public List<UserTypeTO> getAllUserTypes() {
+		return new UserTypeManager().getAllUserTypes();
 	}
 }

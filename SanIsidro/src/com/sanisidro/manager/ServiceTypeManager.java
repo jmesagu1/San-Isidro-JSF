@@ -6,8 +6,8 @@ import com.sanisidro.service.CRUDService;
 import com.sanisidro.service.ServiceTypeService;
 import com.sanisidro.to.ServiceTypeTO;
 
-public class ServiceTypeManager {
-	
+public class ServiceTypeManager {	
+
 	public static final String DATA_SERVICE = "com.sanisidro.service.ServiceTypeService";
 	
 	public ServiceTypeTO createServiceType(ServiceTypeTO serviceType)
