@@ -50,7 +50,7 @@ public class AdminUserTypeMB {
 		this.userTypeTmp = userTypeTmp;
 	}
 
-	public String createServiceType()
+	public String createUserType()
 	{
 		if (!name.trim().equals("")) {
 			UserTypeTO to = new UserTypeTO();
@@ -90,7 +90,7 @@ public class AdminUserTypeMB {
 		return "";
 	}
 	
-	public String updateServiceType() {
+	public String updateUserType() {
 		if (!userTypeTmp.getName().trim().equals("")) {
 			SanIsidroWrapper wrapper = new SanIsidroWrapper();
 			if (wrapper.updateUserType(userTypeTmp))
@@ -117,7 +117,7 @@ public class AdminUserTypeMB {
 		if (tmp != null) {
 			userTypes = tmp;
 		} else {
-			message = "Error consultando tipos de servicio";
+			message = "Error consultando tipos de usuario";
 		}
 	}
 }
