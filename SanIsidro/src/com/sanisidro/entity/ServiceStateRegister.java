@@ -9,16 +9,17 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Service_State_Register")
+@Table(name="Service_status_Register")
 
 public class ServiceStateRegister implements Serializable {
 
 	   
 	@Id
-	private long id;
-	private Service service;
+	private long id;	
+	private long id_service;
 	private double price;
 	@Temporal(TemporalType.DATE)
+	@Column (name = "change_Date")
 	private Calendar changeDate;
 	private static final long serialVersionUID = 1L;
 
@@ -31,14 +32,7 @@ public class ServiceStateRegister implements Serializable {
 
 	public void setId(long id) {
 		this.id = id;
-	}   
-	public Service getService() {
-		return this.service;
 	}
-
-	public void setService(Service service) {
-		this.service = service;
-	}   
 	public double getPrice() {
 		return this.price;
 	}
@@ -52,6 +46,12 @@ public class ServiceStateRegister implements Serializable {
 
 	public void setChangeDate(Calendar changeDate) {
 		this.changeDate = changeDate;
+	}
+	public long getId_service() {
+		return id_service;
+	}
+	public void setId_service(long id_service) {
+		this.id_service = id_service;
 	}
    
 }
