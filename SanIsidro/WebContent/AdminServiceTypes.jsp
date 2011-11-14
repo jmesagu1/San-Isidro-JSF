@@ -14,7 +14,10 @@
 </script>
 </head>
 <body>
+<center>
 <f:view>
+<jsp:include page="PrincipalTemplate.jsp"></jsp:include>
+<h1>Tipos de Servicios</h1>
 <h:form id="form">
 	<h:inputHidden id="editId" value="#{serviceTypeMB.editId}"/>
 	<h:panelGrid border="1" columns="2">
@@ -53,5 +56,6 @@
 	</h:dataTable>
 	</h:form>
 </f:view>
+</center>
 </body>
 </html>

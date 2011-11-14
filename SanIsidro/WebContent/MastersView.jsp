@@ -9,13 +9,14 @@
 </head>
 <body>
 <f:view>
+<jsp:include page="PrincipalTemplate.jsp"></jsp:include>
 	<center>
 		<h:form>
 			<h1>Gestión de Maestros</h1>
 				<h:panelGrid border="1" columns="1">
-					<h:outputLink>Zonas</h:outputLink>
-					<h:outputLink>Tipos de Usuarios</h:outputLink>
-					<h:outputLink>Tipos de Servicios</h:outputLink>
+					<h:outputLink value="CreateZone.jsp">Zonas</h:outputLink>
+					<h:outputLink value="AdminUserTypes.jsp">Tipos de Usuarios</h:outputLink>
+					<h:outputLink value="AdminServiceTypes.jsp">Tipos de Servicios</h:outputLink>
 					<h:outputLink>Tarifas</h:outputLink>
 				</h:panelGrid>
 			</h:form>

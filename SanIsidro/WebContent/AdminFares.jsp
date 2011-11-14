@@ -14,7 +14,10 @@
 </script>
 </head>
 <body>
+<center>
 <f:view>
+<jsp:include page="PrincipalTemplate.jsp"></jsp:include>
+<h1>Tarifas básicas</h1>
 <h:form id="form">
 	<h:inputHidden id="editId" value="#{faresMB.editId}"/>
 	<h:panelGrid border="0" columns="2">
@@ -55,5 +58,6 @@
 	</h:dataTable>
 </h:form>
 </f:view>
+</center>
 </body>
 </html>

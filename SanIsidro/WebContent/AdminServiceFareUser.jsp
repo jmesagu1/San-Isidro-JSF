@@ -16,7 +16,10 @@
 </script>
 </head>
 <body>
+<center>
 <f:view>
+<jsp:include page="PrincipalTemplate.jsp"></jsp:include>
+<h1>Trifas Específicas</h1>
 <h:form id="form">
 	<h:inputHidden id="fareId" value="#{serviceFareUserMB.fareIdEdit}"/>
 	<h:inputHidden id="serviceTypeId" value="#{serviceFareUserMB.serviceTypeIdOld}"/>
@@ -89,5 +92,6 @@
 	</h:dataTable>
 </h:form>
 </f:view>
+</center>
 </body>
 </html>

@@ -9,6 +9,7 @@
 </head>
 <body>
 <f:view>
+	<jsp:include page="PrincipalTemplate.jsp"></jsp:include>
 	<h:form>
 		<center>
 			<h1>Página Principal</h1>
