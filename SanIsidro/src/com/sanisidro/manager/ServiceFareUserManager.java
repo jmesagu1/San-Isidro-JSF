@@ -22,8 +22,8 @@ public class ServiceFareUserManager {
 		}
 	}
 
-	public boolean update(ServiceFareUserTO sfu) {
-		return new CRUDService().update(DATA_SERVICE, sfu);
+	public boolean update(ServiceFareUserTO sfu, ServiceFareUserPK oldPk) {
+		return new CRUDService().update(DATA_SERVICE, new Object[]{sfu, oldPk});
 	}
 
 	public ServiceFareUserTO getDetails(ServiceFareUserPK pk) {

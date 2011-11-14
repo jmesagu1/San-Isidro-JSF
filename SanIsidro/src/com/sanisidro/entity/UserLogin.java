@@ -13,10 +13,9 @@ import javax.persistence.*;
 public class UserLogin implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id	
 	private long iduser;	
-	private byte admin;
+	private boolean admin;
 
     @Lob()
 	private String mail;
@@ -38,11 +37,11 @@ public class UserLogin implements Serializable {
 		this.iduser = iduser;
 	}
 
-	public byte getAdmin() {
+	public boolean getAdmin() {
 		return this.admin;
 	}
 
-	public void setAdmin(byte admin) {
+	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
 

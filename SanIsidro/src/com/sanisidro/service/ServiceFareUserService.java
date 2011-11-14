@@ -8,8 +8,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import com.sanisidro.entity.Fare;
 import com.sanisidro.entity.ServiceFareUser;
 import com.sanisidro.entity.ServiceFareUserPK;
+import com.sanisidro.entity.ServiceType;
+import com.sanisidro.entity.UserType;
 import com.sanisidro.to.FareTO;
 import com.sanisidro.to.ServiceFareUserTO;
 import com.sanisidro.to.ServiceTypeTO;
@@ -21,30 +24,40 @@ public class ServiceFareUserService implements IService {
 	public Object create(Object obj, EntityManager em) {
 		ServiceFareUserTO to = (ServiceFareUserTO) obj;
 		em.getTransaction().begin();
-		ServiceFareUser entity = new ServiceFareUser();
-		entity.setIdFare(to.getFare().getId());
-		entity.setIdServiceType(to.getServiceType().getId());
-		entity.setIdUserType(to.getUserType().getId());
-		em.persist(entity);
-		em.getTransaction().commit();
-		return to;
+		try {
+			FareTO fare = GenericService.create(new Fare(), to.getFare());
+			ServiceFareUser entity = new ServiceFareUser();
+			entity.setIdFare(fare.getId());
+			entity.setIdServiceType(to.getServiceType().getId());
+			entity.setIdUserType(to.getUserType().getId());
+			em.persist(entity);
+			em.getTransaction().commit();
+			return to;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
 	public boolean update(Object obj, EntityManager em) {
 		boolean result = false;
-		ServiceFareUserTO to = (ServiceFareUserTO) obj;
-		ServiceFareUserPK pk = new ServiceFareUserPK();
-		pk.setIdFare(to.getFare().getId());
-		pk.setIdServiceType(to.getServiceType().getId());
-		pk.setIdUserType(to.getUserType().getId());
+		ServiceFareUserTO to = (ServiceFareUserTO) ((Object[]) obj)[0];
+		ServiceFareUserPK pk = (ServiceFareUserPK) ((Object[]) obj)[1];
 		ServiceFareUser entity = em.find(ServiceFareUser.class, pk);
 		if (entity != null) {
 			em.getTransaction().begin();
-			entity.setIdFare(to.getFare().getId());
-			entity.setIdServiceType(to.getServiceType().getId());
-			entity.setIdUserType(to.getUserType().getId());
-			em.persist(entity);
+			try {
+				GenericService.update(new Fare(), to.getFare());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			em.remove(entity);
+			ServiceFareUser newEntity = new ServiceFareUser();
+			newEntity.setIdFare(to.getFare().getId());
+			newEntity.setIdServiceType(to.getServiceType().getId());
+			newEntity.setIdUserType(to.getUserType().getId());
+			em.persist(newEntity);
 			em.getTransaction().commit();
 			result = true;
 		}
@@ -63,20 +76,21 @@ public class ServiceFareUserService implements IService {
 		ServiceFareUser entity = em.find(ServiceFareUser.class, pk);
 		if (entity != null) {
 			FareTO fare = new FareTO();
-			fare.setId(entity.getIdFare());
-			fare = (FareTO) new FareService().getDetails(fare, em);
 			UserTypeTO userType = new UserTypeTO();
-			userType.setId(entity.getIdUserType());
-			userType = (UserTypeTO) new UserTypeService().getDetails(userType, em);
 			ServiceTypeTO serviceType = new ServiceTypeTO();
-			serviceType.setId(entity.getIdServiceType());
-			serviceType = (ServiceTypeTO) new ServiceTypeService().getDetails(serviceType, em);
-			
-			ServiceFareUserTO to = new ServiceFareUserTO();
-			to.setFare(fare);
-			to.setUserType(userType);
-			to.setServiceType(serviceType);
-			return to;
+			try {
+				fare = GenericService.find(new Fare(), fare, entity.getIdFare());
+				userType = GenericService.find(new UserType(), userType, entity.getIdUserType());
+				serviceType = GenericService.find(new ServiceType(), serviceType, entity.getIdServiceType());
+
+				ServiceFareUserTO to = new ServiceFareUserTO();
+				to.setFare(fare);
+				to.setUserType(userType);
+				to.setServiceType(serviceType);
+				return to;
+			} catch (Exception e) {
+				return null;
+			}
 		} else {
 			return null;
 		}
@@ -93,7 +107,10 @@ public class ServiceFareUserService implements IService {
         	pk.setIdFare(sfu.getIdFare());
         	pk.setIdServiceType(sfu.getIdServiceType());
         	pk.setIdUserType(sfu.getIdUserType());
-			result.add((ServiceFareUserTO) getDetails(pk, em));
+        	ServiceFareUserTO to = (ServiceFareUserTO) getDetails(pk, em);
+        	if (to != null) {
+        		result.add(to);
+        	}
 		}
     	if (em != null) {
     		em.close();

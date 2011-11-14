@@ -19,8 +19,8 @@
 <f:view>
 <h:form id="form">
 	<h:inputHidden id="fareId" value="#{serviceFareUserMB.fareIdEdit}"/>
-	<h:inputHidden id="serviceTypeId" value="#{serviceFareUserMB.serviceTypeIdEdit}"/>
-	<h:inputHidden id="userTypeId" value="#{serviceFareUserMB.userTypeIdEdit}"/>
+	<h:inputHidden id="serviceTypeId" value="#{serviceFareUserMB.serviceTypeIdOld}"/>
+	<h:inputHidden id="userTypeId" value="#{serviceFareUserMB.userTypeIdOld}"/>
 	<h:panelGrid border="0" columns="2">
 		<h:outputText value="Nombre de Tarifa" />
 		<h:inputText value="#{serviceFareUserMB.name}"/>
@@ -64,7 +64,7 @@
 				<h:outputText value="Tipo de Servicio"></h:outputText>
 			</f:facet>
 			<h:outputLabel value="#{fare.serviceType.detail}" rendered="#{not fare.editable}"/>
-			<h:selectOneMenu value="#{serviceFareUserMB.serviceTypeIdEdit}" rendered="#{fare.editable}">
+			<h:selectOneMenu value="#{serviceFareUserMB.serviceTypeIdNew}" rendered="#{fare.editable}">
 				<f:selectItem itemLabel="-SELECT-" itemValue="-1"/>
 				<f:selectItems value="#{serviceFareUserMB.serviceTypeList}"/>
 			</h:selectOneMenu>
@@ -74,7 +74,7 @@
 				<h:outputText value="Tipo de Usuario"></h:outputText>
 			</f:facet>
 			<h:outputLabel value="#{fare.userType.name}" rendered="#{not fare.editable}"/>
-			<h:selectOneMenu value="#{serviceFareUserMB.userTypeIdEdit}" rendered="#{fare.editable}">
+			<h:selectOneMenu value="#{serviceFareUserMB.userTypeIdNew}" rendered="#{fare.editable}">
 				<f:selectItem itemLabel="-SELECT-" itemValue="-1"/>
 				<f:selectItems value="#{serviceFareUserMB.userTypeList}"/>
 			</h:selectOneMenu>
@@ -84,7 +84,7 @@
 				<h:outputText value="Acción"></h:outputText>
 			</f:facet>
 			<h:commandLink onclick="setEditId(#{fare.fare.id},#{fare.serviceType.id},#{fare.userType.id});" value="Editar" action="#{serviceFareUserMB.setEditable}" rendered="#{not fare.editable}"/>
-			<h:commandLink value="Guardar" rendered="#{fare.editable}"/>
+			<h:commandLink value="Guardar" action="#{serviceFareUserMB.updateFare}" rendered="#{fare.editable}"/>
 		</h:column>
 	</h:dataTable>
 </h:form>

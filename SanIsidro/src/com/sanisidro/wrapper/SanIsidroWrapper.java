@@ -2,6 +2,7 @@ package com.sanisidro.wrapper;
 
 import java.util.List;
 
+import com.sanisidro.entity.ServiceFareUserPK;
 import com.sanisidro.manager.FareManager;
 import com.sanisidro.manager.ServiceFareUserManager;
 import com.sanisidro.manager.ServiceTypeManager;
@@ -43,6 +44,8 @@ public class SanIsidroWrapper {
 		return new UserTypeManager().createUserType(userType);
 	}
 	
+	//public boolean login (UserLoginTO userLoginTO)
+	
 	public boolean updateUserType(UserTypeTO userType) {
 		return new UserTypeManager().updateUserType(userType);
 	}
@@ -67,8 +70,8 @@ public class SanIsidroWrapper {
 		return new ServiceFareUserManager().create(sfu);
 	}
 
-	public boolean updateServiceFareUser(ServiceFareUserTO sfu) {
-		return new ServiceFareUserManager().update(sfu);
+	public boolean updateServiceFareUser(ServiceFareUserTO sfu, ServiceFareUserPK oldPK) {
+		return new ServiceFareUserManager().update(sfu, oldPK);
 	}
 
 	public List<ServiceFareUserTO> getAllServiceFareUser() {

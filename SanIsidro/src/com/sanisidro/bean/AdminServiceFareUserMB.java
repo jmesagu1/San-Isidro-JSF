@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.faces.model.SelectItem;
 
+import com.sanisidro.entity.ServiceFareUserPK;
 import com.sanisidro.to.FareTO;
 import com.sanisidro.to.ServiceFareUserTO;
 import com.sanisidro.to.ServiceTypeTO;
@@ -29,8 +30,10 @@ public class AdminServiceFareUserMB {
 	private String nameEdit;
 	private double priceEdit;
 	private long fareIdEdit;
-	private long userTypeIdEdit;
-	private long serviceTypeIdEdit;
+	private long userTypeIdOld;
+	private long serviceTypeIdOld;
+	private long userTypeIdNew;
+	private long serviceTypeIdNew;
 
 	public AdminServiceFareUserMB() {
 		userTypeList = new ArrayList<SelectItem>();
@@ -102,17 +105,17 @@ public class AdminServiceFareUserMB {
 	public void setPriceEdit(double priceEdit) {
 		this.priceEdit = priceEdit;
 	}
-	public long getUserTypeIdEdit() {
-		return userTypeIdEdit;
+	public long getUserTypeIdOld() {
+		return userTypeIdOld;
 	}
-	public void setUserTypeIdEdit(long userTypeIdEdit) {
-		this.userTypeIdEdit = userTypeIdEdit;
+	public void setUserTypeIdOld(long userTypeIdOld) {
+		this.userTypeIdOld = userTypeIdOld;
 	}
-	public long getServiceTypeIdEdit() {
-		return serviceTypeIdEdit;
+	public long getServiceTypeIdOld() {
+		return serviceTypeIdOld;
 	}
-	public void setServiceTypeIdEdit(long serviceTypeIdEdit) {
-		this.serviceTypeIdEdit = serviceTypeIdEdit;
+	public void setServiceTypeIdOld(long serviceTypeIdOld) {
+		this.serviceTypeIdOld = serviceTypeIdOld;
 	}
 	public long getFareIdEdit() {
 		return fareIdEdit;
@@ -126,6 +129,18 @@ public class AdminServiceFareUserMB {
 	public void setFares(List<ServiceFareUserTO> fares) {
 		this.fares = fares;
 	}
+	public long getUserTypeIdNew() {
+		return userTypeIdNew;
+	}
+	public void setUserTypeIdNew(long userTypeIdNew) {
+		this.userTypeIdNew = userTypeIdNew;
+	}
+	public long getServiceTypeIdNew() {
+		return serviceTypeIdNew;
+	}
+	public void setServiceTypeIdNew(long serviceTypeIdNew) {
+		this.serviceTypeIdNew = serviceTypeIdNew;
+	}
 
 	public String createServiceFareUser() {
 		String result = "failure";
@@ -133,27 +148,24 @@ public class AdminServiceFareUserMB {
 			if (userTypeId != -1) {
 				if (serviceTypeId != -1) {
 					SanIsidroWrapper wrapper = new SanIsidroWrapper();
+					ServiceFareUserTO sfu = new ServiceFareUserTO();
 					FareTO fare = new FareTO();
 					fare.setName(name);
 					fare.setPrice(price);
-					fare = wrapper.createFare(fare);
-					if (fare.getId() != -1) {
-						ServiceFareUserTO sfu = new ServiceFareUserTO();
-		
-						ServiceTypeTO serviceType = new ServiceTypeTO();
-						serviceType.setId(serviceTypeId);
-						UserTypeTO userType = new UserTypeTO();
-						userType.setId(userTypeId);
+					ServiceTypeTO serviceType = new ServiceTypeTO();
+					serviceType.setId(serviceTypeId);
+					UserTypeTO userType = new UserTypeTO();
+					userType.setId(userTypeId);
 
-						sfu.setFare(fare);
-						sfu.setServiceType(serviceType);
-						sfu.setUserType(userType);
-						if (wrapper.createServiceFareUser(sfu) != null) {
-							message = "Tarifa creada exitosamente";
-							result = "success";
-						} else {
-							message = "Error creando Tarifa";
-						}
+					sfu.setFare(fare);
+					sfu.setServiceType(serviceType);
+					sfu.setUserType(userType);
+					if (wrapper.createServiceFareUser(sfu) != null) {
+						message = "Tarifa creada exitosamente";
+						refreshList();
+						result = "success";
+					} else {
+						message = "Error creando Tarifa";
 					}
 				} else {
 					message = "Debe seleccionar un Tipo de Servicio";
@@ -173,16 +185,68 @@ public class AdminServiceFareUserMB {
 		for (i = 0; i < fares.size(); i++) {
 			ServiceFareUserTO fare = fares.get(i);
 			if (fare.getFare().getId() == fareIdEdit &&
-					fare.getUserType().getId() == userTypeIdEdit &&
-					fare.getServiceType().getId() == serviceTypeIdEdit ) {
+					fare.getUserType().getId() == userTypeIdOld &&
+					fare.getServiceType().getId() == serviceTypeIdOld ) {
 				nameEdit = fare.getFare().getName();
 				priceEdit = fare.getFare().getPrice();
 				fares.get(i).setEditable(true);
+				userTypeIdNew = userTypeIdOld;
+				serviceTypeIdNew = serviceTypeIdOld;
 			}
 			else {
 				fares.get(i).setEditable(false);
 			}
 		}
 		return "";
+	}
+	
+	public String updateFare() {
+		String result = "failure";
+		if (!nameEdit.trim().equals("")) {
+			if (userTypeIdNew != -1) {
+				if (serviceTypeIdNew != -1) {
+					SanIsidroWrapper wrapper = new SanIsidroWrapper();
+					ServiceFareUserTO sfu = new ServiceFareUserTO();
+
+					FareTO fare = new FareTO();
+					fare.setId(fareIdEdit);
+					fare.setName(nameEdit);
+					fare.setPrice(priceEdit);
+					fare = wrapper.createFare(fare);
+					ServiceTypeTO serviceType = new ServiceTypeTO();
+					serviceType.setId(serviceTypeIdNew);
+					UserTypeTO userType = new UserTypeTO();
+					userType.setId(userTypeIdNew);
+
+					sfu.setFare(fare);
+					sfu.setServiceType(serviceType);
+					sfu.setUserType(userType);
+					
+					ServiceFareUserPK oldPK = new ServiceFareUserPK();
+					oldPK.setIdFare(fareIdEdit);
+					oldPK.setIdServiceType(serviceTypeIdOld);
+					oldPK.setIdUserType(userTypeIdOld);
+					if (wrapper.updateServiceFareUser(sfu, oldPK)) {
+						message = "Tarifa actualizada exitosamente";
+						refreshList();
+						result = "success";
+					} else {
+						message = "Error actualizando Tarifa";
+					}
+				} else {
+					message = "Debe seleccionar un Tipo de Servicio";
+				}
+			} else {
+				message = "Debe seleccionar un Tipo de Usuario";
+			}
+		} else {
+			message = "Debe ingresar un nombre para la Tarifa";
+		}
+		return result;
+	}
+	
+	public void refreshList() {
+		SanIsidroWrapper wrapper = new SanIsidroWrapper();
+		fares = wrapper.getAllServiceFareUser();
 	}
 }
