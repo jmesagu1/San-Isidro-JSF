@@ -1,14 +1,17 @@
 package com.sanisidro.wrapper;
 
+import java.util.Calendar;
 import java.util.List;
 
 import com.sanisidro.entity.ServiceFareUserPK;
 import com.sanisidro.manager.FareManager;
+import com.sanisidro.manager.MeterManager;
 import com.sanisidro.manager.ServiceFareUserManager;
 import com.sanisidro.manager.ServiceTypeManager;
 import com.sanisidro.manager.UserTypeManager;
 import com.sanisidro.manager.ZoneManager;
 import com.sanisidro.to.FareTO;
+import com.sanisidro.to.MeterTO;
 import com.sanisidro.to.ServiceFareUserTO;
 import com.sanisidro.to.ServiceTypeTO;
 import com.sanisidro.to.UserTypeTO;
@@ -76,5 +79,24 @@ public class SanIsidroWrapper {
 
 	public List<ServiceFareUserTO> getAllServiceFareUser() {
 		return new ServiceFareUserManager().getAllServiceFareUser();
+	}
+
+	public List<MeterTO> searchMeters(String serie, double price, Calendar dateFrom, Calendar dateTo) 
+			throws Exception  
+	{
+		return new MeterManager().searchMeters(serie, price, dateFrom, dateTo);
+	}
+
+	public List<MeterTO> searchMetersByUser(String name, String lastName, long dni) throws Exception  
+	{
+		return new MeterManager().searchMetersByUser(name, lastName, dni);
+	}
+
+	public List<MeterTO> searchMetersByService(String farmName, double priceSuscription, 
+			long payNumber, Calendar dateFrom, Calendar dateTo, long zoneId, long serviceTypeId) 
+			throws Exception  
+	{
+		return new MeterManager().searchMetersByService(farmName, priceSuscription, payNumber, 
+				dateFrom, dateTo, zoneId, serviceTypeId);
 	}
 }
