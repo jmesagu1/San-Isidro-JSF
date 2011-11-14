@@ -19,7 +19,7 @@
 					<h:outputLabel value="Contraseña"></h:outputLabel>
 					<h:inputSecret required="true" requiredMessage="Ingrese la contraseña"></h:inputSecret>
 				</h:panelGrid>
-				<h:commandButton value="Ingresar"></h:commandButton>
+				<h:commandButton value="Ingresar" action="#{login.login}"></h:commandButton>
 				<br><h:messages style="color: #FF0000"></h:messages>
 			</h:form>
 	</center>
