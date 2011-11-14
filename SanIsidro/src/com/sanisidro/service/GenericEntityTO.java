@@ -26,7 +26,8 @@ public abstract class GenericEntityTO
 	public static <S, T> S getTO (T entity, S to) throws Exception
 	{
 		Class<? extends Object> cEntity = entity.getClass();
-		Class<? extends Object> cTO = to.getClass();			
+		Class<? extends Object> cTO = to.getClass();	
+		S ton = (S) cTO.newInstance();
 		
 		Method [] ms = cEntity.getMethods();
 		for (int i = 0; i < ms.length; i++)
@@ -35,10 +36,10 @@ public abstract class GenericEntityTO
 			{			
 				String name = ms[i].getName();
 				name = name.replace("get", "set");
-				cTO.getMethod(name, ms[i].getReturnType()).invoke(to, new Object [] {ms[i].invoke(entity, new Object[]{})});				
+				cTO.getMethod(name, ms[i].getReturnType()).invoke(ton, new Object [] {ms[i].invoke(entity, new Object[]{})});				
 			}
 		}		
 		
-		return to;
+		return ton;
 	}
 }

@@ -2,6 +2,7 @@ package com.sanisidro.wrapper;
 
 import java.util.List;
 
+import com.sanisidro.manager.LoginManager;
 import com.sanisidro.manager.ServiceTypeManager;
 import com.sanisidro.manager.UserTypeManager;
 import com.sanisidro.manager.ZoneManager;
@@ -11,6 +12,12 @@ import com.sanisidro.to.UserTypeTO;
 import com.sanisidro.to.ZoneTO;
 
 public class SanIsidroWrapper {
+	
+	
+	public static SanIsidroWrapper getInstance ()
+	{
+		return new SanIsidroWrapper();		
+	}
 	
 	public ZoneTO createZone(ZoneTO zone) {
 		return new ZoneManager().createZone(zone);
@@ -40,7 +47,10 @@ public class SanIsidroWrapper {
 		return new UserTypeManager().createUserType(userType);
 	}
 	
-	//public boolean login (UserLoginTO userLoginTO)
+	public boolean login (UserLoginTO userLoginTO) throws Exception
+	{
+		return LoginManager.getInstance().login(userLoginTO);
+	}
 	
 	public boolean updateUserType(UserTypeTO userType) {
 		return new UserTypeManager().updateUserType(userType);

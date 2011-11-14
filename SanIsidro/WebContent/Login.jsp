@@ -15,12 +15,13 @@
 			<H1>Login</H1>		
 			<h:panelGrid border="1" columns="2">
 					<h:outputLabel value="Usuario:"></h:outputLabel>
-					<h:inputText required="true" requiredMessage="Ingrese un nombre de usuario" value="#{login.username }"></h:inputText>
+					<h:inputText maxlength="20" required="true" requiredMessage="Ingrese un nombre de usuario" value="#{login.username }"></h:inputText>
 					<h:outputLabel value="Contraseña"></h:outputLabel>
-					<h:inputSecret required="true" requiredMessage="Ingrese la contraseña" value="#{login.password }"></h:inputSecret>
+					<h:inputSecret required="true" maxlength="20" requiredMessage="Ingrese la contraseña" value="#{login.password }"></h:inputSecret>
 				</h:panelGrid>
 				<h:commandButton value="Ingresar" action="#{login.login}"></h:commandButton>
 				<br><h:messages style="color: #FF0000"></h:messages>
+				<br><h:outputLabel value="#{login.message }" style="color: #FF0000"></h:outputLabel>
 			</h:form>
 	</center>
 </f:view>

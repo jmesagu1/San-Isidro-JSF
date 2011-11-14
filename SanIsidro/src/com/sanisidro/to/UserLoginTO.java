@@ -1,18 +1,11 @@
 package com.sanisidro.to;
 
-public class UserLoginTO {	
-	
-	private long iduser;	
+public class UserLoginTO {
 	private boolean admin;   
 	private String mail;   
 	private String pass;   
 	private String username;
-	public long getIduser() {
-		return iduser;
-	}
-	public void setIduser(long iduser) {
-		this.iduser = iduser;
-	}
+	
 	public boolean getAdmin() {
 		return admin;
 	}

@@ -23,7 +23,15 @@
 	<managed-bean>
 		<managed-bean-name>login</managed-bean-name>
 		<managed-bean-class>com.sanisidro.bean.Login</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
+	<navigation-rule>
+		<display-name>Login</display-name>
+		<from-view-id>/Login.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>admin</from-outcome>
+			<to-view-id>/HomeAdmin.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
 </faces-config>

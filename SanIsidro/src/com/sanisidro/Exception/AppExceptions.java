@@ -1,4 +1,4 @@
-package Exception;
+package com.sanisidro.Exception;
 
 public final class AppExceptions 
 {

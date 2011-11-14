@@ -12,9 +12,7 @@ import javax.persistence.*;
 @Table(name="user_login")
 public class UserLogin implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id	
-	private long iduser;	
+		
 	private boolean admin;
 
     @Lob()
@@ -23,19 +21,12 @@ public class UserLogin implements Serializable {
     @Lob()
 	private String pass;
 
+    @Id
     @Lob()
 	private String username;
 
     public UserLogin() {
     }
-
-	public long getIduser() {
-		return this.iduser;
-	}
-
-	public void setIduser(long iduser) {
-		this.iduser = iduser;
-	}
 
 	public boolean getAdmin() {
 		return this.admin;

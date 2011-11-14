@@ -51,7 +51,7 @@ public abstract class GenericService
 		}
 		else
 		{
-			return GenericEntityTO.getTO(entity, to);
+			return GenericEntityTO.getTO(entity, to );
 		}
 	}	
 	
