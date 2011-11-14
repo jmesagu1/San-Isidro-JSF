@@ -2,19 +2,18 @@ package com.sanisidro.manager;
 
 import java.util.List;
 
-import com.sanisidro.service.CRUDService;
+import com.sanisidro.entity.Zone;
+import com.sanisidro.service.GenericService;
 import com.sanisidro.service.ZoneService;
 import com.sanisidro.to.ZoneTO;
 
 public class ZoneManager {
 	
-	public static final String DATA_SERVICE = "com.sanisidro.service.ZoneService";
-	
 	public ZoneTO createZone(ZoneTO zone)
 	{
 		try 
 		{
-			return (ZoneTO) new CRUDService().create(DATA_SERVICE, zone);
+			return GenericService.create(new Zone(), zone);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -24,7 +23,13 @@ public class ZoneManager {
 	}
 	
 	public boolean updateZone(ZoneTO zone) {
-		return new CRUDService().update(DATA_SERVICE, zone);
+		try {
+			GenericService.update(new Zone(), zone);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	public List<ZoneTO> getAllZones() {

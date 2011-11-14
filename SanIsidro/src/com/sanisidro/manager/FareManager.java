@@ -2,19 +2,18 @@ package com.sanisidro.manager;
 
 import java.util.List;
 
-import com.sanisidro.service.CRUDService;
+import com.sanisidro.entity.Fare;
 import com.sanisidro.service.FareService;
+import com.sanisidro.service.GenericService;
 import com.sanisidro.to.FareTO;
 import com.sanisidro.to.ServiceFareUserTO;
 
 public class FareManager {
-	
-	public static final String DATA_SERVICE = "com.sanisidro.service.FareService";
 
 	public FareTO create(FareTO fare) {
 		try 
 		{
-			return (FareTO) new CRUDService().create(DATA_SERVICE, fare);
+			return GenericService.create(new Fare(), fare);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -24,18 +23,12 @@ public class FareManager {
 	}
 
 	public boolean update(FareTO fare) {
-		return new CRUDService().update(DATA_SERVICE, fare);
-	}
-
-	public FareTO getDetails(FareTO fare) {
-		try 
-		{
-			return (FareTO) new CRUDService().get(DATA_SERVICE, fare);
-		}
-		catch (Exception e) {
+		try {
+			GenericService.update(new Fare(), fare);
+			return true;
+		} catch (Exception e) {
 			e.printStackTrace();
-			fare.setId(-1);
-			return fare;
+			return false;
 		}
 	}
 	

@@ -53,11 +53,13 @@ public class ServiceFareUserService implements IService {
 				e.printStackTrace();
 			}
 			em.remove(entity);
+			em.getTransaction().commit();
+			em.getTransaction().begin();
 			ServiceFareUser newEntity = new ServiceFareUser();
 			newEntity.setIdFare(to.getFare().getId());
 			newEntity.setIdServiceType(to.getServiceType().getId());
 			newEntity.setIdUserType(to.getUserType().getId());
-			em.persist(newEntity);
+			em.merge(newEntity);
 			em.getTransaction().commit();
 			result = true;
 		}

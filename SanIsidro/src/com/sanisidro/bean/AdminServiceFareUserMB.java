@@ -212,7 +212,6 @@ public class AdminServiceFareUserMB {
 					fare.setId(fareIdEdit);
 					fare.setName(nameEdit);
 					fare.setPrice(priceEdit);
-					fare = wrapper.createFare(fare);
 					ServiceTypeTO serviceType = new ServiceTypeTO();
 					serviceType.setId(serviceTypeIdNew);
 					UserTypeTO userType = new UserTypeTO();

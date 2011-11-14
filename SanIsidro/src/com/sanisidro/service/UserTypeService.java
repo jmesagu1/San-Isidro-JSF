@@ -11,45 +11,7 @@ import javax.persistence.Query;
 import com.sanisidro.entity.UserType;
 import com.sanisidro.to.UserTypeTO;
 
-public class UserTypeService implements IService{
-
-	@Override
-	public Object create(Object obj, EntityManager em) {
-		UserTypeTO to = (UserTypeTO) obj;
-		em.getTransaction().begin();
-		UserType userType = new UserType();
-		userType.setName(to.getName());
-		em.persist(userType);
-		to.setId(userType.getId());
-		em.getTransaction().commit();
-		return to;
-	}
-
-	@Override
-	public boolean update(Object obj, EntityManager em) {
-		boolean result = false;
-		UserTypeTO to = (UserTypeTO) obj;
-		em.getTransaction().begin();
-		UserType userType = em.find(UserType.class, to.getId());
-		if (userType != null) {
-			userType.setName(to.getName());
-			result = true;
-		}
-		em.getTransaction().commit();
-		return result;
-	}
-
-	@Override
-	public Object getDetails(Object obj, EntityManager em) {
-		UserTypeTO to = (UserTypeTO) obj;
-		UserType userType = em.find(UserType.class, to.getId());
-		if (userType != null) {
-			to.setName(userType.getName());
-			return to;
-		} else {
-			return null;
-		}
-	}
+public class UserTypeService {
 	
 	public List<UserTypeTO> getAllUserTypes() throws Exception
 	{
@@ -59,10 +21,7 @@ public class UserTypeService implements IService{
         List<UserType> rs = query.getResultList();
         List<UserTypeTO> result = new ArrayList<UserTypeTO>();
         for (UserType userType : rs) {
-        	UserTypeTO to = new UserTypeTO();
-        	to.setId(userType.getId());
-			to.setName(userType.getName());
-			result.add(to);
+			result.add(GenericEntityTO.getTO(userType, new UserTypeTO()));
 		}
     	if (em != null) {
     		em.close();
