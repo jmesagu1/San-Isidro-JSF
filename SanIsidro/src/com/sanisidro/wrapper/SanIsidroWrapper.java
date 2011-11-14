@@ -6,6 +6,7 @@ import com.sanisidro.manager.ServiceTypeManager;
 import com.sanisidro.manager.UserTypeManager;
 import com.sanisidro.manager.ZoneManager;
 import com.sanisidro.to.ServiceTypeTO;
+import com.sanisidro.to.UserLoginTO;
 import com.sanisidro.to.UserTypeTO;
 import com.sanisidro.to.ZoneTO;
 
@@ -38,6 +39,8 @@ public class SanIsidroWrapper {
 	public UserTypeTO createUserType(UserTypeTO userType) {
 		return new UserTypeManager().createUserType(userType);
 	}
+	
+	//public boolean login (UserLoginTO userLoginTO)
 	
 	public boolean updateUserType(UserTypeTO userType) {
 		return new UserTypeManager().updateUserType(userType);
