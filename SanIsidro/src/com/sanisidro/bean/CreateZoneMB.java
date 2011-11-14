@@ -65,6 +65,7 @@ public class CreateZoneMB {
 			if (zone.getId() != -1)
 			{
 				message = "Zona registrada exitosamente";
+				refreshList();
 				return "success";
 			}
 			else
@@ -101,6 +102,7 @@ public class CreateZoneMB {
 			{
 				zoneTmp.setEditable(false);
 				message = "Zona actualizada exitosamente";
+				refreshList();
 				return "success";
 			}
 			else
@@ -112,6 +114,15 @@ public class CreateZoneMB {
 		else {
 			message = "Debe ingresar un nombre de zona";
 			return "failure";
+		}
+	}
+	
+	public void refreshList() {
+		List<ZoneTO> tmp = new SanIsidroWrapper().getAllZones(); 
+		if (tmp != null) {
+			zones = tmp;
+		} else {
+			message = "Error consultando zonas";
 		}
 	}
 }

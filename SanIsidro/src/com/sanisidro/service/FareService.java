@@ -8,20 +8,19 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import com.sanisidro.entity.UserType;
-import com.sanisidro.to.UserTypeTO;
+import com.sanisidro.entity.Fare;
+import com.sanisidro.to.FareTO;
 
-public class UserTypeService {
-	
-	public List<UserTypeTO> getAllUserTypes() throws Exception
-	{
+public class FareService 
+{	
+	public List<FareTO> getAllFares() throws Exception {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("SanIsidro");
 		EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("select ut from UserType ut");
-        List<UserType> rs = query.getResultList();
-        List<UserTypeTO> result = new ArrayList<UserTypeTO>();
-        for (UserType userType : rs) {
-			result.add(GenericEntityTO.getTO(userType, new UserTypeTO()));
+        Query query = em.createQuery("select f from Fare f");
+        List<Fare> fares = query.getResultList();
+        List<FareTO> result = new ArrayList<FareTO>();
+        for (Fare fare : fares) {
+			result.add(GenericEntityTO.getTO(fare, new FareTO()));
 		}
     	if (em != null) {
     		em.close();

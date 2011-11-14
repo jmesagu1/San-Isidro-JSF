@@ -2,19 +2,18 @@ package com.sanisidro.manager;
 
 import java.util.List;
 
-import com.sanisidro.service.CRUDService;
+import com.sanisidro.entity.UserType;
+import com.sanisidro.service.GenericService;
 import com.sanisidro.service.UserTypeService;
 import com.sanisidro.to.UserTypeTO;
 
 public class UserTypeManager {
 
-	public static final String DATA_SERVICE = "com.sanisidro.service.UserTypeService";
-
 	public UserTypeTO createUserType(UserTypeTO userType)
 	{
 		try 
 		{
-			return (UserTypeTO) new CRUDService().create(DATA_SERVICE, userType);
+			return GenericService.create(new UserType(), userType);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -24,7 +23,13 @@ public class UserTypeManager {
 	}
 
 	public boolean updateUserType(UserTypeTO userType) {
-		return new CRUDService().update(DATA_SERVICE, userType);
+		try {
+			GenericService.update(new UserType(), userType);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	public List<UserTypeTO> getAllUserTypes() {

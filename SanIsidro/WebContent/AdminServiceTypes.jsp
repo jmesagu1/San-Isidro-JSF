@@ -41,7 +41,7 @@
 			<f:facet name="header">
 				<h:outputText value="Tiene Contador"></h:outputText>
 			</f:facet>
-			<h:selectBooleanCheckbox value="#{type.hasMeter}" readonly="#{not type.editable}"/>
+			<h:selectBooleanCheckbox value="#{type.hasMeter}" disabled="#{not type.editable}"/>
 		</h:column>
 		<h:column>
 			<f:facet name="header">
