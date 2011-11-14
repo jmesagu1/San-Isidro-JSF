@@ -3,10 +3,12 @@ package com.sanisidro.wrapper;
 import java.util.List;
 
 import com.sanisidro.manager.FareManager;
+import com.sanisidro.manager.ServiceFareUserManager;
 import com.sanisidro.manager.ServiceTypeManager;
 import com.sanisidro.manager.UserTypeManager;
 import com.sanisidro.manager.ZoneManager;
 import com.sanisidro.to.FareTO;
+import com.sanisidro.to.ServiceFareUserTO;
 import com.sanisidro.to.ServiceTypeTO;
 import com.sanisidro.to.UserTypeTO;
 import com.sanisidro.to.ZoneTO;
@@ -59,5 +61,17 @@ public class SanIsidroWrapper {
 	
 	public List<FareTO> getAllFares() {
 		return new FareManager().getAllFares();
+	}
+	
+	public ServiceFareUserTO createServiceFareUser(ServiceFareUserTO sfu) {
+		return new ServiceFareUserManager().create(sfu);
+	}
+
+	public boolean updateServiceFareUser(ServiceFareUserTO sfu) {
+		return new ServiceFareUserManager().update(sfu);
+	}
+
+	public List<ServiceFareUserTO> getAllServiceFareUser() {
+		return new ServiceFareUserManager().getAllServiceFareUser();
 	}
 }

@@ -12,6 +12,7 @@ import javax.persistence.*;
 public class Fare 
 {	   
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	private double price;
 	@Column(name="Fare_Name")

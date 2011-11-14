@@ -31,7 +31,7 @@
 	<h:dataTable border="1" value="#{faresMB.fares}" var="fare">
 		<h:column>
 			<f:facet name="header">
-				<h:outputText value="Tipo de Servicio"></h:outputText>
+				<h:outputText value="Tarifa"></h:outputText>
 			</f:facet>
 			<h:outputText value="#{fare.name}" rendered="#{not fare.editable}"/>
 			<h:inputText value="#{faresMB.fareTmp.name}" rendered="#{fare.editable}"/>

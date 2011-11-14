@@ -5,6 +5,7 @@ import java.util.List;
 import com.sanisidro.service.CRUDService;
 import com.sanisidro.service.FareService;
 import com.sanisidro.to.FareTO;
+import com.sanisidro.to.ServiceFareUserTO;
 
 public class FareManager {
 	
@@ -39,8 +40,18 @@ public class FareManager {
 	}
 	
 	public List<FareTO> getAllFares() {
-		try {
-			return new FareService().getAllFares();
+		try 
+		{
+			List<FareTO> fares = new FareService().getAllFares();
+			List<ServiceFareUserTO> compositeFares = new ServiceFareUserManager().getAllServiceFareUser();
+			for (int i = 0; i < fares.size(); i++) {
+				for (int j = 0; j < compositeFares.size(); j++) {
+					if (fares.get(i).getId() == compositeFares.get(j).getFare().getId()) {
+						fares.remove(i);
+					}
+				}
+			}
+			return fares;
 		}
 		catch (Exception e) {
 			e.printStackTrace();

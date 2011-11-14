@@ -42,7 +42,6 @@ public class UserTypeService implements IService{
 	@Override
 	public Object getDetails(Object obj, EntityManager em) {
 		UserTypeTO to = (UserTypeTO) obj;
-		em.getTransaction().begin();
 		UserType userType = em.find(UserType.class, to.getId());
 		if (userType != null) {
 			to.setName(userType.getName());

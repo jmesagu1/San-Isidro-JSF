@@ -44,7 +44,6 @@ public class ServiceTypeService implements IService
 	@Override
 	public Object getDetails(Object obj, EntityManager em) {
 		ServiceTypeTO to = (ServiceTypeTO) obj;
-		em.getTransaction().begin();
 		ServiceType serviceType = em.find(ServiceType.class, to.getId());
 		if (serviceType != null) {
 			to.setDetail(serviceType.getDetail());
