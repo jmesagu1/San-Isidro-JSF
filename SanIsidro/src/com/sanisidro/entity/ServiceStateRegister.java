@@ -9,7 +9,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Service_status_Register")
+@Table(name="service_status_register")
 
 public class ServiceStateRegister implements Serializable {
 

@@ -15,11 +15,11 @@
 		<class>com.sanisidro.entity.ServiceStatus</class>
 		<class>com.sanisidro.entity.UserLogin</class>
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sanisidrodb"/>
-			<property name="javax.persistence.jdbc.user" value="root"/>
-			<!--   <property name="javax.persistence.jdbc.password" value="oTtbp@va3_Nl"/> -->
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/sanisidrodb"/>
+			<property name="javax.persistence.jdbc.user" value="simroot"/>
+			<property name="javax.persistence.jdbc.password" value="oTtbp@va3_Nl"/> 
 			
-			<property name="javax.persistence.jdbc.password" value="284569"/>
+			<!--<property name="javax.persistence.jdbc.password" value="284569"/>-->
 			
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
 		</properties>

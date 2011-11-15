@@ -8,7 +8,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="User_Type")
+@Table(name="user_type")
 public class UserType
 {	   
 	@Id

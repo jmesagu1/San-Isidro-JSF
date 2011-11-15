@@ -3,12 +3,14 @@ package com.sanisidro.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the zone database table.
  * 
  */
 @Entity
+@Table(name = "zone")
 public class Zone
 {
 	@Id	

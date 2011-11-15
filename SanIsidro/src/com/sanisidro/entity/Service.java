@@ -10,7 +10,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-
+@Table(name = "service")
 public class Service implements Serializable {
 	   
 	@Id

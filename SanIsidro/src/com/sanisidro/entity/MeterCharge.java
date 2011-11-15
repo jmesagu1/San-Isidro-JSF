@@ -8,7 +8,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Charge_Meter_Register")
+@Table(name="charge_meter_register")
 public class MeterCharge
 {	   
 	@Id
