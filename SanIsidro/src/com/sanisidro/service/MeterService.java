@@ -1,9 +1,7 @@
 package com.sanisidro.service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -21,7 +19,7 @@ public class MeterService {
 	{
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("SanIsidro");
 		EntityManager em = emf.createEntityManager();
-		String strQuery = "select m from Meter m where lower(m.serie) like lower(:serie)";
+		String strQuery = "select m from Meter m where m.deleted = false and lower(m.serie) like lower(:serie)";
 		boolean withPrice = false;
 		if (price != -1) {
 			strQuery += " and m.price = :price";
@@ -53,7 +51,7 @@ public class MeterService {
 	{
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("SanIsidro");
 		EntityManager em = emf.createEntityManager();
-		String strQuery = "select m from Meter m where lower(m.service.user.name) like lower(:name) " +
+		String strQuery = "select m from Meter m where m.deleted = false and lower(m.service.user.name) like lower(:name) " +
 				"and lower(m.service.user.surname) like lower(:lastName)";
 		boolean withDni = false;
 		if (dni != -1) {
@@ -80,7 +78,7 @@ public class MeterService {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("SanIsidro");
 		EntityManager em = emf.createEntityManager();
 
-		String strQuery = "select m from Meter m where lower(m.service.farmName) like lower(:farmName)";
+		String strQuery = "select m from Meter m where m.deleted = false and lower(m.service.farmName) like lower(:farmName)";
 		boolean withPrice = false;
 		if (priceSuscription != -1) {
 			strQuery += " and m.service.priceSuscription = :priceSuscription";
@@ -135,8 +133,6 @@ public class MeterService {
 	private List<MeterTO> convertList(List<Meter> meters) throws Exception {
         List<MeterTO> result = new ArrayList<MeterTO>();
         for (Meter meter : meters) {
-        	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        	System.out.println(format.format(new Date(meter.getDateBought().getTimeInMillis())));
 			result.add(GenericEntityTO.getTO(meter, new MeterTO()));
 		}
         return result;
