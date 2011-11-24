@@ -60,6 +60,11 @@
 		<managed-bean-class>com.sanisidro.bean.AdminServiceStatusMB</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>createMeterMB</managed-bean-name>
+		<managed-bean-class>com.sanisidro.bean.CreateMeterMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 	<navigation-rule>
 		<display-name>Login</display-name>
 		<from-view-id>/Login.jsp</from-view-id>

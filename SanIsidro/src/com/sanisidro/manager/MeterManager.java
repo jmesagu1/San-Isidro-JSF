@@ -3,6 +3,8 @@ package com.sanisidro.manager;
 import java.util.Calendar;
 import java.util.List;
 
+import com.sanisidro.entity.Meter;
+import com.sanisidro.service.GenericService;
 import com.sanisidro.service.MeterService;
 import com.sanisidro.to.MeterTO;
 
@@ -26,5 +28,15 @@ public class MeterManager {
 	{
 		return new MeterService().searchMetersByService(farmName, priceSuscription, payNumber, 
 				dateFrom, dateTo, zoneId, serviceTypeId);
+	}
+
+	public MeterTO createMeter(MeterTO meter) {
+		try {
+			meter = GenericService.create(new Meter(), meter);
+		} catch (Exception e) {
+			meter.setId(-1);
+			e.printStackTrace();
+		}
+		return meter;
 	}
 }

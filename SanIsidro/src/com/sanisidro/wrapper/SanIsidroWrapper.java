@@ -125,4 +125,8 @@ public class SanIsidroWrapper {
 	public List<ServiceStatusTO> getAllServiceStatus() {
 		return new ServiceStatusManager().getAllServiceStatus();
 	}
+
+	public MeterTO createMeter(MeterTO meter) {
+		return new MeterManager().createMeter(meter);
+	}
 }
