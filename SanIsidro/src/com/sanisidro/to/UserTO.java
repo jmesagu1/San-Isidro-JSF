@@ -1,5 +1,10 @@
 package com.sanisidro.to;
 
+import com.sanisidro.annotation.DTO;
+import com.sanisidro.entity.User;
+
+@DTO(entityClass = User.class)
+
 public class UserTO {
 
 

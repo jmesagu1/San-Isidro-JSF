@@ -3,12 +3,16 @@ package com.sanisidro.entity;
 import java.lang.String;
 import javax.persistence.*;
 
+import com.sanisidro.annotation.Model;
+import com.sanisidro.to.UserTO;
+
 /**
  * Entity implementation class for Entity: User
  *
  */
 @Entity
 @Table(name = "customer")
+@Model(dtoClass = UserTO.class)
 public class User{
 	
 	@Id	

@@ -4,12 +4,16 @@ import java.lang.String;
 import java.util.Calendar;
 import javax.persistence.*;
 
+import com.sanisidro.annotation.Model;
+import com.sanisidro.to.MeterTO;
+
 /**
  * Entity implementation class for Entity: Meter
  *
  */
 @Entity
-@Table (name = "meter") 
+@Table (name = "meter")
+@Model(dtoClass = MeterTO.class)
 public class Meter 
 {
 	@Id

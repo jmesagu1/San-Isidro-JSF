@@ -4,13 +4,16 @@ import java.io.Serializable;
 import java.lang.String;
 import javax.persistence.*;
 
+import com.sanisidro.annotation.Model;
+import com.sanisidro.to.ServiceTypeTO;
+
 /**
  * Entity implementation class for Entity: ServiceType
  *
  */
 @Entity
 @Table(name="service_type")
-
+@Model(dtoClass = ServiceTypeTO.class)
 public class ServiceType implements Serializable {
 
 	   

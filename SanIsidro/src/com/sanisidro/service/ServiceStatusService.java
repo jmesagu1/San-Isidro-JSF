@@ -21,7 +21,8 @@ public class ServiceStatusService {
         List<ServiceStatus> statuses = query.getResultList();
         List<ServiceStatusTO> result = new ArrayList<ServiceStatusTO>();
         for (ServiceStatus serviceStatus : statuses) {
-			result.add(GenericEntityTO.getTO(serviceStatus, new ServiceStatusTO()));
+        	ServiceStatusTO to = GenericEntityTO.getTO(serviceStatus); 
+			result.add(to);
 		}
     	if (em != null) {
     		em.close();

@@ -4,13 +4,16 @@ import java.io.Serializable;
 import java.lang.String;
 import javax.persistence.*;
 
+import com.sanisidro.annotation.Model;
+import com.sanisidro.to.ServiceStatusTO;
+
 /**
  * Entity implementation class for Entity: ServiceStatus
  *
  */
 @Entity
 @Table(name="service_status")
-
+@Model(dtoClass = ServiceStatusTO.class)
 public class ServiceStatus implements Serializable {
 
 	   

@@ -3,12 +3,16 @@ package com.sanisidro.entity;
 import java.lang.String;
 import javax.persistence.*;
 
+import com.sanisidro.annotation.Model;
+import com.sanisidro.to.FareTO;
+
 /**
  * Entity implementation class for Entity: Fare
  *
  */
 @Entity
-@Table (name = "fare") 
+@Table (name = "fare")
+@Model(dtoClass = FareTO.class)
 public class Fare 
 {	   
 	@Id
