@@ -10,6 +10,7 @@ import com.sanisidro.manager.MeterManager;
 import com.sanisidro.manager.ServiceFareUserManager;
 import com.sanisidro.manager.ServiceStatusManager;
 import com.sanisidro.manager.ServiceTypeManager;
+import com.sanisidro.manager.UserManager;
 import com.sanisidro.manager.UserTypeManager;
 import com.sanisidro.manager.ZoneManager;
 import com.sanisidro.to.FareTO;
@@ -18,6 +19,7 @@ import com.sanisidro.to.ServiceFareUserTO;
 import com.sanisidro.to.ServiceStatusTO;
 import com.sanisidro.to.ServiceTypeTO;
 import com.sanisidro.to.UserLoginTO;
+import com.sanisidro.to.UserTO;
 import com.sanisidro.to.UserTypeTO;
 import com.sanisidro.to.ZoneTO;
 
@@ -57,7 +59,7 @@ public class SanIsidroWrapper {
 		return new UserTypeManager().createUserType(userType);
 	}
 	
-	public boolean login (UserLoginTO userLoginTO) throws Exception
+	public UserLoginTO login (UserLoginTO userLoginTO) throws Exception
 	{
 		return LoginManager.getInstance().login(userLoginTO);
 	}
@@ -121,6 +123,11 @@ public class SanIsidroWrapper {
 	public boolean updateServiceStatus(ServiceStatusTO serviceStatus) {
 		return new ServiceStatusManager().updateServiceStatus(serviceStatus);
 	}
+	
+	public UserTypeTO getUserTypeByID(UserTypeTO userTypeTO)
+	{
+		return new UserTypeManager().getUserTypeByID(userTypeTO);
+	}
 
 	public List<ServiceStatusTO> getAllServiceStatus() {
 		return new ServiceStatusManager().getAllServiceStatus();
@@ -128,5 +135,10 @@ public class SanIsidroWrapper {
 
 	public MeterTO createMeter(MeterTO meter) {
 		return new MeterManager().createMeter(meter);
+	}
+	
+	public UserTO createUser(UserTO userTO)
+	{
+		return UserManager.getInstance().createUser(userTO);
 	}
 }

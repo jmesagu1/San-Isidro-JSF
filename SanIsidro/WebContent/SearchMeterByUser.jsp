@@ -9,6 +9,7 @@
 </head>
 <body>
 <f:view>
+<jsp:include page="PrincipalTemplate.jsp"></jsp:include>
 <h:form id="form">
 	<h:panelGrid columns="2">
 		<h:outputLabel value="Nombre"/>

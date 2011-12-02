@@ -8,7 +8,22 @@
 <title>Insert title here</title>
 </head>
 <body>
-<f:view>	
+<f:view>
+	<jsp:include page="PrincipalTemplate.jsp"></jsp:include>
+	<center>
+		<h:form>
+			<h1>Operación terminada con éxito</h1>
+			<br/>
+			<%
+				String messaje = session.getAttribute("messaje").toString();
+				if (messaje != null)
+				{
+					out.println(messaje);	
+					session.setAttribute("messaje", "");
+				}
+			 %>
+		</h:form>
+	</center>
 </f:view>
 </body>
 </html>

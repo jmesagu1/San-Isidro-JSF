@@ -15,7 +15,7 @@
 			<h1>Página Principal</h1>
 				<h:panelGrid border="1" columns="1">
 					<h:outputLink value="MastersView.jsp"> Gestión de Maestros</h:outputLink>
-					<h:outputLink>Gestión de Clientes</h:outputLink>
+					<h:outputLink value="RegisterCustomer.jsp">Gestión de Clientes</h:outputLink>
 					<h:outputLink>Gestión de Contadores</h:outputLink>
 					<h:outputLink>Gestión de Servicios</h:outputLink>
 					<h:outputLink>Gestión de Consumos</h:outputLink>

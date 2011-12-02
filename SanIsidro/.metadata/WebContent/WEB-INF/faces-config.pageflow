@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13196823995930" configfile="/SanIsidro/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="Login" x="58" y="175" id="pf13212927461380" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf13212927678012" path="/Login.jsp"/>
-  <nodes xsi:type="pageflow:PFPage" name="HomeAdmin" x="323" y="72" id="pf13212927461391" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13212927678012" path="/HomeAdmin.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="Login" x="72" y="24" id="pf13212927461380" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf13212927678012" path="/Login.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="HomeAdmin" x="302" y="24" id="pf13212927461391" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13212927678012" path="/HomeAdmin.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="SuccessPage" x="299" y="125" id="pf13227919117020" inlinks="pf13227919463422" path="/SuccessPage.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="RegisterCustomer" x="53" y="125" id="pf13227919299341" outlinks="pf13227919463422" path="/RegisterCustomer.jsp"/>
   <links id="pf13212927678012" target="pf13212927461391" source="pf13212927461380" outcome="admin"/>
+  <links id="pf13227919463422" target="pf13227919117020" source="pf13227919299341" outcome="success"/>
 </pageflow:Pageflow>

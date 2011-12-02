@@ -27,6 +27,7 @@
 </head>
 <body>
 <f:view>
+<jsp:include page="PrincipalTemplate.jsp"></jsp:include>
 <h:form id="form">
 	<h:inputHidden id="dateFrom" value="#{searchMeterMB.strDateFrom}"></h:inputHidden>
 	<h:inputHidden id="dateTo" value="#{searchMeterMB.strDateTo}"></h:inputHidden>

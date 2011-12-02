@@ -15,6 +15,7 @@
 </head>
 <body>
 <f:view>
+<jsp:include page="PrincipalTemplate.jsp"></jsp:include>
 <h:form id="form">
 	<h:inputHidden id="editId" value="#{serviceStatusMB.editId}"/>
    	<h:panelGrid border="1" columns="2">

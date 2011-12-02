@@ -2,6 +2,9 @@ package com.sanisidro.bean;
 
 import com.sanisidro.to.UserLoginTO;
 import com.sanisidro.wrapper.SanIsidroWrapper;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 public class Login 
@@ -18,11 +21,20 @@ public class Login
 		String returnValue = "null";
 		try 
 		{
-			 boolean valid = SanIsidroWrapper.getInstance().login(loginTO);
-			if (valid)
+			UserLoginTO to = SanIsidroWrapper.getInstance().login(loginTO);
+			if (to != null)
 			{
 				message = "";
-				returnValue  = "admin";
+				saveUserSession(to);
+				if (to.getAdmin())
+				{
+					returnValue  = "admin";
+				}
+				else
+				{
+					returnValue  = "user";
+				}
+				
 			}
 			
 		}
@@ -32,6 +44,15 @@ public class Login
 		}
 		
  		return returnValue;
+	}
+	
+	
+	public  void saveUserSession (UserLoginTO userTO)
+	{
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
+		HttpSession session = request.getSession();
+		session.setAttribute("user", userTO);
 	}
 
 	public String getUsername() {

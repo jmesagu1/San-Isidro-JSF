@@ -65,12 +65,25 @@
 		<managed-bean-class>com.sanisidro.bean.CreateMeterMB</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>userRegister</managed-bean-name>
+		<managed-bean-class>com.sanisidro.bean.UserRegister</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 	<navigation-rule>
 		<display-name>Login</display-name>
 		<from-view-id>/Login.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>admin</from-outcome>
 			<to-view-id>/HomeAdmin.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>RegisterCustomer</display-name>
+		<from-view-id>/RegisterCustomer.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/SuccessPage.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 

@@ -12,7 +12,7 @@ public abstract class GenericEntityTO
 		Method [] ms = cTO.getMethods();
 		for (int i = 0; i < ms.length; i++)
 		{
-			if (ms [i].getName().contains("get") && !ms[i].getName().contains("Class"))
+			if (ms [i].getName().contains("get") && !ms[i].getName().contains("Class") && !ms[i].getReturnType().toString().contains("TO"))
 			{			
 				String name = ms[i].getName();
 				name = name.replace("get", "set");
@@ -36,6 +36,7 @@ public abstract class GenericEntityTO
 			{			
 				String name = ms[i].getName();
 				name = name.replace("get", "set");
+				
 				cTO.getMethod(name, ms[i].getReturnType()).invoke(ton, new Object [] {ms[i].invoke(entity, new Object[]{})});				
 			}
 		}		

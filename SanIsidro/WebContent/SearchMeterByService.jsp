@@ -27,6 +27,7 @@
 </head>
 <body>
 <f:view>
+<jsp:include page="PrincipalTemplate.jsp"></jsp:include>
 <h:form id="form">
 	<h:inputHidden id="dateFrom" value="#{meterByServiceMB.strDateFrom}"></h:inputHidden>
 	<h:inputHidden id="dateTo" value="#{meterByServiceMB.strDateTo}"></h:inputHidden>

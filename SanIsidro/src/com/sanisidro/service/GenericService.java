@@ -6,6 +6,28 @@ import javax.persistence.Persistence;
 
 public abstract class GenericService 
 {
+	
+	public static <T> T create (T entity ) throws Exception
+	{
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("SanIsidro");
+		EntityManager em = null;
+		try
+		{
+			em = emf.createEntityManager();
+			em.getTransaction().begin();			
+			em.merge(entity);
+			em.getTransaction().commit();			
+		}
+		finally
+		{
+			if (em != null)
+			{
+				em.close();
+			}			
+		}
+		return entity;	
+	}
+	
 	public static <T, S> S create (T entity, S to ) throws Exception
 	{
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("SanIsidro");

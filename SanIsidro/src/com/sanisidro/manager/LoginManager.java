@@ -12,15 +12,14 @@ public class LoginManager
 		return new LoginManager();
 	}
 	
-	public boolean login (UserLoginTO userLoginTO) throws Exception
-	{
-		boolean valid = false;		
+	public UserLoginTO login (UserLoginTO userLoginTO) throws Exception
+	{	
 		UserLoginTO to = GenericService.find(new UserLogin(), userLoginTO, userLoginTO.getUsername());
 		if (to != null)
 		{
 			if (userLoginTO.getPass().equals(to.getPass()))
 			{
-				valid = true;
+				return to;
 			}
 			else
 			{
@@ -30,8 +29,7 @@ public class LoginManager
 		else
 		{
 			throw new Exception(AppExceptions.INVALID_USERNAME);
-		}					
-				
-		return valid;
+		}			
+		
 	}
 }

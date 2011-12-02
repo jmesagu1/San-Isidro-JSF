@@ -21,6 +21,18 @@ public class UserTypeManager {
 			return userType;
 		}
 	}
+	
+	public UserTypeTO getUserTypeByID(UserTypeTO userTypeTO)
+	{
+		try
+		{
+			return GenericService.find(new UserType(), userTypeTO, userTypeTO.getId()); 
+		} 
+		catch (Exception e) 
+		{
+			return userTypeTO;
+		}
+	}
 
 	public boolean updateUserType(UserTypeTO userType) {
 		try {
