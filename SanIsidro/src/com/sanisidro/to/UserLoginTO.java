@@ -1,5 +1,9 @@
 package com.sanisidro.to;
 
+import com.sanisidro.annotation.DTO;
+import com.sanisidro.entity.UserLogin;
+
+@DTO(entityClass = UserLogin.class)
 public class UserLoginTO {
 	private boolean admin;   
 	private String mail;   

@@ -21,7 +21,8 @@ public class UserTypeService {
         List<UserType> rs = query.getResultList();
         List<UserTypeTO> result = new ArrayList<UserTypeTO>();
         for (UserType userType : rs) {
-			result.add(GenericEntityTO.getTO(userType, new UserTypeTO()));
+        	UserTypeTO to = GenericEntityTO.getTO(userType); 
+			result.add(to);
 		}
     	if (em != null) {
     		em.close();

@@ -1,5 +1,9 @@
 package com.sanisidro.to;
 
+import com.sanisidro.annotation.DTO;
+import com.sanisidro.entity.UserType;
+
+@DTO(entityClass = UserType.class)
 public class UserTypeTO {
 
 	private long id;

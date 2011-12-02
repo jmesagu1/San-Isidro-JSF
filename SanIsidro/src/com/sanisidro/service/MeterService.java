@@ -133,7 +133,8 @@ public class MeterService {
 	private List<MeterTO> convertList(List<Meter> meters) throws Exception {
         List<MeterTO> result = new ArrayList<MeterTO>();
         for (Meter meter : meters) {
-			result.add(GenericEntityTO.getTO(meter, new MeterTO()));
+        	MeterTO to = GenericEntityTO.getTO(meter); 
+			result.add(to);
 		}
         return result;
 	}

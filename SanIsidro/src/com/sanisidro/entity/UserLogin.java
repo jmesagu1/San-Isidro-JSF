@@ -3,6 +3,9 @@ package com.sanisidro.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.sanisidro.annotation.Model;
+import com.sanisidro.to.UserLoginTO;
+
 
 /**
  * The persistent class for the user_login database table.
@@ -10,6 +13,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="user_login")
+@Model(dtoClass = UserLoginTO.class)
 public class UserLogin implements Serializable {
 	private static final long serialVersionUID = 1L;
 		
