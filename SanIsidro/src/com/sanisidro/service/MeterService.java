@@ -12,7 +12,7 @@ import javax.persistence.Query;
 import com.sanisidro.entity.Meter;
 import com.sanisidro.to.MeterTO;
 
-public class MeterService {
+public class MeterService implements IService {
 
 	public List<MeterTO> searchMeters(String serie, double price, Calendar dateFrom, Calendar dateTo) 
 			throws Exception  
@@ -137,5 +137,23 @@ public class MeterService {
 			result.add(to);
 		}
         return result;
+	}
+
+	@Override
+	public Object create(Object obj, EntityManager em) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean update(Object obj, EntityManager em) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Object getDetails(Object obj, EntityManager em) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

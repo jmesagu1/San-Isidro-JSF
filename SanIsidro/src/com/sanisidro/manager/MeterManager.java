@@ -39,4 +39,13 @@ public class MeterManager {
 		}
 		return meter;
 	}
+
+	public MeterTO findMeter(long meterId) {
+		try {
+			return GenericService.find(new Meter(), new MeterTO(), meterId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

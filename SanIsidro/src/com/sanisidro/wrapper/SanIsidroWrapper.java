@@ -10,6 +10,7 @@ import com.sanisidro.manager.MeterManager;
 import com.sanisidro.manager.ServiceFareUserManager;
 import com.sanisidro.manager.ServiceStatusManager;
 import com.sanisidro.manager.ServiceTypeManager;
+import com.sanisidro.manager.UseMeterRegisterManager;
 import com.sanisidro.manager.UserManager;
 import com.sanisidro.manager.UserTypeManager;
 import com.sanisidro.manager.ZoneManager;
@@ -18,6 +19,7 @@ import com.sanisidro.to.MeterTO;
 import com.sanisidro.to.ServiceFareUserTO;
 import com.sanisidro.to.ServiceStatusTO;
 import com.sanisidro.to.ServiceTypeTO;
+import com.sanisidro.to.UseMeterRegisterTO;
 import com.sanisidro.to.UserLoginTO;
 import com.sanisidro.to.UserTO;
 import com.sanisidro.to.UserTypeTO;
@@ -140,5 +142,13 @@ public class SanIsidroWrapper {
 	public UserTO createUser(UserTO userTO)
 	{
 		return UserManager.getInstance().createUser(userTO);
+	}
+	
+	public UseMeterRegisterTO createUseMeterRegister(UseMeterRegisterTO to) {
+		return new UseMeterRegisterManager().createUseMeterRegister(to);
+	}
+
+	public MeterTO getMeter(long meterId) {
+		return new MeterManager().findMeter(meterId);
 	}
 }
