@@ -12,6 +12,10 @@ import javax.persistence.*;
 @Table(name="use_meter_register")
 public class UseMeterRegister implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "Id")
 	private long id;

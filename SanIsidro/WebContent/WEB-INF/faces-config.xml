@@ -43,7 +43,7 @@
 	<managed-bean>
 		<managed-bean-name>searchMeterMB</managed-bean-name>
 		<managed-bean-class>com.sanisidro.bean.SearchMeterMB</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
+		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>metersByUserMB</managed-bean-name>
@@ -73,6 +73,11 @@
 	<managed-bean>
 		<managed-bean-name>registerUseMeter</managed-bean-name>
 		<managed-bean-class>com.sanisidro.bean.RegisterUseMeter</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>searchCustomerMB</managed-bean-name>
+		<managed-bean-class>com.sanisidro.bean.SearchCustomerMB</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<navigation-rule>

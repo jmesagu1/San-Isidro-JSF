@@ -151,4 +151,9 @@ public class SanIsidroWrapper {
 	public MeterTO getMeter(long meterId) {
 		return new MeterManager().findMeter(meterId);
 	}
+	
+	public List<UserTO> getAllCustomers ()
+	{
+		return UserManager.getInstance().getAllCustomers();
+	}
 }

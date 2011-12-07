@@ -11,7 +11,7 @@
 <f:view>
 <jsp:include page="PrincipalTemplate.jsp"></jsp:include>
 	<center>
-		<h1>Registrar Usuario</h1>
+		<h1>Registrar Cliente</h1>
 		<h:form>
 				<h:panelGrid border="1" columns="2">
 					<h:outputLabel value="Documento: "></h:outputLabel>

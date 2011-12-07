@@ -15,6 +15,7 @@ public class UserTO {
 	private String telephone1;
 	private String telephone2;
 	private UserTypeTO type;
+	private boolean editable = true;
    
 	public long getDni() {
 		return this.dni;
@@ -63,6 +64,14 @@ public class UserTO {
 	}
 	public void setType(UserTypeTO type) {
 		this.type = type;
+	}
+
+	public boolean isEditable() {
+		return editable;
+	}
+
+	public void setEditable(boolean editable) {
+		this.editable = editable;
 	}
 	
 }

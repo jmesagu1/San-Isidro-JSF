@@ -1,6 +1,7 @@
 package com.sanisidro.service;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.lang.annotation.Annotation;
 
 import com.sanisidro.annotation.DTO;
@@ -66,7 +67,7 @@ public abstract class GenericEntityTO
 			Method [] ms = cEntity.getMethods();
 			for (int i = 0; i < ms.length; i++)
 			{
-				if (ms [i].getName().contains("get") && !ms[i].getName().contains("Class"))
+				if (ms [i].getName().contains("get") && !ms[i].getName().contains("Class") && !ms[i].getName().contains("getType"))
 				{			
 					String name = ms[i].getName();
 					name = name.replace("get", "set");
@@ -81,4 +82,22 @@ public abstract class GenericEntityTO
 			throw new Exception("The object passed is not from a Model marked class");
 		}
 	}
+	
+	private static boolean x(Type[] genericExceptionTypes) 
+	{		
+		System.out.println("je llamó");
+		boolean x = false;
+		for (int  i = 0; i < genericExceptionTypes.length && !x; i++)
+		{
+			System.out.println(genericExceptionTypes[i].toString());
+			if (genericExceptionTypes[i].toString().contains("entity"))
+			{
+				x = true;
+			}
+			
+		}
+		return x;		
+	}
+
+	
 }
