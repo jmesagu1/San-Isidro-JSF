@@ -6,7 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(value=ElementType.TYPE)
-public @interface Model {
-	Class<? extends Object> dtoClass();
+@Target(value=ElementType.FIELD)
+public @interface ModelField {
+
+	Class<? extends Object> entityClass();
 }

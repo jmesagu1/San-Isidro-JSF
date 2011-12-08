@@ -1,11 +1,17 @@
 package com.sanisidro.entity;
 
-import java.lang.String;
 import java.util.Calendar;
-import javax.persistence.*;
 
-import com.sanisidro.annotation.Model;
-import com.sanisidro.to.MeterTO;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Entity implementation class for Entity: Meter
@@ -13,7 +19,6 @@ import com.sanisidro.to.MeterTO;
  */
 @Entity
 @Table (name = "meter")
-@Model(dtoClass = MeterTO.class)
 public class Meter 
 {
 	@Id

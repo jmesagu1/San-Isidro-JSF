@@ -5,16 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.sanisidro.annotation.Model;
-import com.sanisidro.to.ZoneTO;
-
 /**
  * The persistent class for the zone database table.
  * 
  */
 @Entity
 @Table(name = "zone")
-@Model(dtoClass = ZoneTO.class)
 public class Zone
 {
 	@Id	

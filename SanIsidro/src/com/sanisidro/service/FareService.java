@@ -20,8 +20,7 @@ public class FareService
         List<Fare> fares = query.getResultList();
         List<FareTO> result = new ArrayList<FareTO>();
         for (Fare fare : fares) {
-        	FareTO to = GenericEntityTO.getTO(fare); 
-			result.add(to);
+			result.add(GenericEntityTO.getTO(fare, new FareTO()));
 		}
     	if (em != null) {
     		em.close();

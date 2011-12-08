@@ -1,9 +1,5 @@
 package com.sanisidro.to;
 
-import com.sanisidro.annotation.DTO;
-import com.sanisidro.entity.Zone;
-
-@DTO(entityClass = Zone.class)
 public class ZoneTO {
 
 	private long id;

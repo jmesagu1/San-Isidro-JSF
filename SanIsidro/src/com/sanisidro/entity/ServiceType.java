@@ -1,11 +1,11 @@
 package com.sanisidro.entity;
 
 import java.io.Serializable;
-import java.lang.String;
-import javax.persistence.*;
 
-import com.sanisidro.annotation.Model;
-import com.sanisidro.to.ServiceTypeTO;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Entity implementation class for Entity: ServiceType
@@ -13,7 +13,6 @@ import com.sanisidro.to.ServiceTypeTO;
  */
 @Entity
 @Table(name="service_type")
-@Model(dtoClass = ServiceTypeTO.class)
 public class ServiceType implements Serializable {
 
 	   

@@ -1,11 +1,12 @@
 package com.sanisidro.entity;
 
 import java.io.Serializable;
-import java.lang.String;
-import javax.persistence.*;
 
-import com.sanisidro.annotation.Model;
-import com.sanisidro.to.ServiceStatusTO;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Entity implementation class for Entity: ServiceStatus
@@ -13,7 +14,6 @@ import com.sanisidro.to.ServiceStatusTO;
  */
 @Entity
 @Table(name="service_status")
-@Model(dtoClass = ServiceStatusTO.class)
 public class ServiceStatus implements Serializable {
 
 	   

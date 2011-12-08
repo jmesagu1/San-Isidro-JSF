@@ -1,10 +1,12 @@
 package com.sanisidro.entity;
 
-import java.lang.String;
-import javax.persistence.*;
-
-import com.sanisidro.annotation.Model;
-import com.sanisidro.to.UserTO;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * Entity implementation class for Entity: User
@@ -12,7 +14,6 @@ import com.sanisidro.to.UserTO;
  */
 @Entity
 @Table(name = "customer")
-@Model(dtoClass = UserTO.class)
 public class User{
 	
 	@Id	

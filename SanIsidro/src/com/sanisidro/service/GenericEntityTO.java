@@ -1,103 +1,72 @@
 package com.sanisidro.service;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
 import java.lang.annotation.Annotation;
 
-import com.sanisidro.annotation.DTO;
-import com.sanisidro.annotation.Model;
+import com.sanisidro.annotation.ModelField;
 
 public abstract class GenericEntityTO 
 {	
-	public static <S, T> T getEntity (S to) throws Exception
+	public static <S, T> T getEntity (T entity, S to) throws Exception
 	{
-		boolean encontroClase = false;
-		Class<? extends Object> cEntity = null;
-		Annotation[] annotations = to.getClass().getAnnotations();
-		for (int i = 0; !encontroClase && i < annotations.length; i++) 
+		Class<? extends Object> cEntity = entity.getClass();
+		Class<? extends Object> cTO = to.getClass();
+		Method [] ms = cTO.getMethods();
+		for (int i = 0; i < ms.length; i++)
 		{
-			if (annotations[i] instanceof DTO)
-			{
-				cEntity = ((DTO)annotations[i]).entityClass();
-				encontroClase = true;
-			}
-		}
-		if (encontroClase) 
-		{
-			T entity = (T) cEntity.newInstance();
-			Class<? extends Object> cTO = to.getClass();			
-			
-			Method [] ms = cTO.getMethods();
-			for (int i = 0; i < ms.length; i++)
-			{
-				if (ms [i].getName().contains("get") && !ms[i].getName().contains("Class") && !ms[i].getReturnType().toString().contains("TO"))
-				{			
-					String name = ms[i].getName();
-					name = name.replace("get", "set");
-					cEntity.getMethod(name, ms[i].getReturnType()).invoke(entity, new Object [] {ms[i].invoke(to, new Object[]{})});				
+			String name = ms[i].getName();
+			if (name.contains("get") && !name.contains("Class"))
+			{			
+				String fieldname = getFieldName(name);
+				name = name.replace("get", "set");
+				Field field = to.getClass().getDeclaredField(fieldname);
+				Annotation annotation = field.getAnnotation(ModelField.class);
+				if (annotation != null) {
+					Class<? extends Object> cSubEntity = ((ModelField) annotation).entityClass();
+					Object subEntity = getEntity(cSubEntity.newInstance(), ms[i].invoke(to, new Object[]{}));
+					cEntity.getMethod(name, cSubEntity).invoke(entity, new Object[] { subEntity });
+				} else {
+					cEntity.getMethod(name, ms[i].getReturnType()).invoke(entity, new Object [] {ms[i].invoke(to, new Object[]{})});
 				}
-			}		
-			
-			return entity;
-		}
-		else
-		{
-			throw new Exception("The object passed is not from a DTO marked class");
-		}
+			}
+		}		
+		return entity;
 	}
 	
-	public static <S, T> S getTO (T entity) throws Exception
+	public static <S, T> S getTO (T entity, S to) throws Exception
 	{
-		boolean encontroClase = false;
-		Class<? extends Object> cTO = null;
-		Annotation[] annotations = entity.getClass().getAnnotations();
-		for (int i = 0; !encontroClase && i < annotations.length; i++) 
+		Class<? extends Object> cTO = to.getClass();
+		Class<? extends Object> cEntity = entity.getClass();	
+		S ton = (S) cTO.newInstance();
+		
+		Method [] ms = cEntity.getMethods();
+		for (int i = 0; i < ms.length; i++)
 		{
-			if (annotations[i] instanceof Model)
+			String name = ms[i].getName();
+			if (name.contains("get") && !name.contains("Class"))
 			{
-				cTO = ((Model)annotations[i]).dtoClass();
-				encontroClase = true;
-			}
-		}
-		if (encontroClase)
-		{
-			Class<? extends Object> cEntity = entity.getClass();	
-			S ton = (S) cTO.newInstance();
-			
-			Method [] ms = cEntity.getMethods();
-			for (int i = 0; i < ms.length; i++)
-			{
-				if (ms [i].getName().contains("get") && !ms[i].getName().contains("Class") && !ms[i].getName().contains("getType"))
-				{			
-					String name = ms[i].getName();
-					name = name.replace("get", "set");
-					cTO.getMethod(name, ms[i].getReturnType()).invoke(ton, new Object [] {ms[i].invoke(entity, new Object[]{})});				
+				String fieldname = getFieldName(name);
+				name = name.replace("get", "set");
+				Field field = to.getClass().getDeclaredField(fieldname);
+				Annotation annotation = field.getAnnotation(ModelField.class);
+				if (annotation != null) {
+					Class<? extends Object> cSubTO = field.getType();
+					Object subTO = getTO(ms[i].invoke(entity, new Object[]{}), cSubTO.newInstance());
+					cTO.getMethod(name, cSubTO).invoke(ton, new Object [] {subTO});
+				} else {
+					cTO.getMethod(name, ms[i].getReturnType()).invoke(ton, new Object [] {ms[i].invoke(entity, new Object[]{})});
 				}
-			}		
-			
-			return ton;
-		}
-		else
-		{
-			throw new Exception("The object passed is not from a Model marked class");
-		}
-	}
-	
-	private static boolean x(Type[] genericExceptionTypes) 
-	{		
-		System.out.println("je llamó");
-		boolean x = false;
-		for (int  i = 0; i < genericExceptionTypes.length && !x; i++)
-		{
-			System.out.println(genericExceptionTypes[i].toString());
-			if (genericExceptionTypes[i].toString().contains("entity"))
-			{
-				x = true;
 			}
-			
-		}
-		return x;		
+		}		
+		
+		return ton;
 	}
-
 	
+	private static String getFieldName(String methodName) {
+		String fieldname = methodName.substring(3);
+		char inicial = Character.toLowerCase(fieldname.charAt(0));
+		fieldname = inicial + fieldname.substring(1);
+		return fieldname;
+	}
 }

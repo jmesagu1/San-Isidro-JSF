@@ -1,10 +1,9 @@
 package com.sanisidro.entity;
 
-import java.lang.String;
-import javax.persistence.*;
-
-import com.sanisidro.annotation.Model;
-import com.sanisidro.to.UserTypeTO;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Entity implementation class for Entity: UserType
@@ -12,7 +11,6 @@ import com.sanisidro.to.UserTypeTO;
  */
 @Entity
 @Table(name="user_type")
-@Model(dtoClass = UserTypeTO.class)
 public class UserType
 {	   
 	@Id

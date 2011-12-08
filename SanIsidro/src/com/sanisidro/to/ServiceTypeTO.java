@@ -1,9 +1,5 @@
 package com.sanisidro.to;
 
-import com.sanisidro.annotation.DTO;
-import com.sanisidro.entity.ServiceType;
-
-@DTO(entityClass = ServiceType.class)
 public class ServiceTypeTO {
 	private long id;
 	private String detail;

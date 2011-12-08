@@ -1,10 +1,11 @@
 package com.sanisidro.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
-import com.sanisidro.annotation.Model;
-import com.sanisidro.to.UserLoginTO;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
 
 
 /**
@@ -13,7 +14,6 @@ import com.sanisidro.to.UserLoginTO;
  */
 @Entity
 @Table(name="user_login")
-@Model(dtoClass = UserLoginTO.class)
 public class UserLogin implements Serializable {
 	private static final long serialVersionUID = 1L;
 		

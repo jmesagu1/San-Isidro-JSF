@@ -2,12 +2,9 @@ package com.sanisidro.to;
 
 import java.util.Calendar;
 
-import com.sanisidro.annotation.DTO;
 import com.sanisidro.entity.Fare;
-import com.sanisidro.entity.Meter;
 import com.sanisidro.entity.Service;
 
-@DTO(entityClass = Meter.class)
 public class MeterTO {
 	private long id;
 	private Calendar dateBought;

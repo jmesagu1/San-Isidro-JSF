@@ -21,8 +21,7 @@ public class ServiceTypeService
         List<ServiceType> rs = query.getResultList();
         List<ServiceTypeTO> result = new ArrayList<ServiceTypeTO>();
         for (ServiceType serviceType : rs) {
-        	ServiceTypeTO to = GenericEntityTO.getTO(serviceType); 
-			result.add(to);
+			result.add(GenericEntityTO.getTO(serviceType, new ServiceTypeTO()));
 		}
     	if (em != null) {
     		em.close();

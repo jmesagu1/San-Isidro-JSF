@@ -133,8 +133,7 @@ public class MeterService implements IService {
 	private List<MeterTO> convertList(List<Meter> meters) throws Exception {
         List<MeterTO> result = new ArrayList<MeterTO>();
         for (Meter meter : meters) {
-        	MeterTO to = GenericEntityTO.getTO(meter); 
-			result.add(to);
+			result.add(GenericEntityTO.getTO(meter, new MeterTO()));
 		}
         return result;
 	}

@@ -1,9 +1,5 @@
 package com.sanisidro.to;
 
-import com.sanisidro.annotation.DTO;
-import com.sanisidro.entity.Fare;
-
-@DTO(entityClass = Fare.class)
 public class FareTO {
 
 	private long id;

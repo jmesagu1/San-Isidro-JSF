@@ -24,9 +24,9 @@ public class UserService {
 			List <User> list = em.createQuery("select u from User u").getResultList();
 			for (User s: list)
 			{
-				UserTO uto = GenericEntityTO.getTO(s);
-				uto.setType((UserTypeTO) GenericEntityTO.getTO(s.getType()));
-				userTOs.add(uto);
+				//UserTO uto = GenericEntityTO.getTO(s, new UserTO());
+				//uto.setType((UserTypeTO) GenericEntityTO.getTO(s.getType()));
+				userTOs.add(GenericEntityTO.getTO(s, new UserTO()));
 			}
 			if (em != null)
 			{
@@ -47,9 +47,11 @@ public class UserService {
 	{
 		try 
 		{
-			User user = GenericEntityTO.getEntity(userTO);			
-			user.setType((UserType) GenericEntityTO.getEntity(userTO.getType()));
-			user = GenericService.create(user);			
+//			User user = GenericEntityTO.getEntity(userTO);			
+//			user.setType((UserType) GenericEntityTO.getEntity(userTO.getType()));
+//			user = GenericService.create(user);
+			
+			User user = GenericService.create(GenericEntityTO.getEntity(new User(), userTO));
 		}
 		catch (Exception e) 
 		{

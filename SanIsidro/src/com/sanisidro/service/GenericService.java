@@ -6,7 +6,6 @@ import javax.persistence.Persistence;
 
 public abstract class GenericService 
 {
-	
 	public static <T> T create (T entity ) throws Exception
 	{
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("SanIsidro");
@@ -36,10 +35,10 @@ public abstract class GenericService
 		{
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
-			entity = GenericEntityTO.getEntity(to);
+			entity = GenericEntityTO.getEntity(entity, to);
 			em.persist(entity);
 			em.getTransaction().commit();
-			to = GenericEntityTO.getTO(entity);
+			to = GenericEntityTO.getTO(entity, to);
 		}
 		finally
 		{
@@ -73,7 +72,7 @@ public abstract class GenericService
 		}
 		else
 		{
-			return GenericEntityTO.getTO(entity);
+			return GenericEntityTO.getTO(entity, to);
 		}
 	}	
 	
@@ -85,7 +84,7 @@ public abstract class GenericService
 		{
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
-			entity = GenericEntityTO.getEntity(to);
+			entity = GenericEntityTO.getEntity(entity, to);
 			entity = em.merge(entity);
 			em.getTransaction().commit();
 		}
@@ -96,7 +95,7 @@ public abstract class GenericService
 				em.close();
 			}
 		}
-		return GenericEntityTO.getTO(entity);
+		return GenericEntityTO.getTO(entity, to);
 	}
 	
 	public static <T> void delete (Object entity, T to) throws  Exception
@@ -107,7 +106,7 @@ public abstract class GenericService
 		{
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
-			entity = GenericEntityTO.getEntity(to);
+			entity = GenericEntityTO.getEntity(entity, to);
 			em.remove(entity);
 			em.getTransaction().commit();
 		}

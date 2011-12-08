@@ -1,12 +1,9 @@
 package com.sanisidro.to;
 
-import com.sanisidro.annotation.DTO;
-import com.sanisidro.entity.User;
-
-@DTO(entityClass = User.class)
+import com.sanisidro.annotation.ModelField;
+import com.sanisidro.entity.UserType;
 
 public class UserTO {
-
 
 	private long dni;
 	private String name;
@@ -14,6 +11,7 @@ public class UserTO {
 	private boolean deleted;
 	private String telephone1;
 	private String telephone2;
+	@ModelField(entityClass = UserType.class)
 	private UserTypeTO type;
 	private boolean editable = true;
    

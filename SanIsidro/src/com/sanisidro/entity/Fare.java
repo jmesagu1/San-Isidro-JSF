@@ -1,10 +1,11 @@
 package com.sanisidro.entity;
 
-import java.lang.String;
-import javax.persistence.*;
-
-import com.sanisidro.annotation.Model;
-import com.sanisidro.to.FareTO;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Entity implementation class for Entity: Fare
@@ -12,7 +13,6 @@ import com.sanisidro.to.FareTO;
  */
 @Entity
 @Table (name = "fare")
-@Model(dtoClass = FareTO.class)
 public class Fare 
 {	   
 	@Id
