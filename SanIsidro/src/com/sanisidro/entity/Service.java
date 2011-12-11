@@ -14,10 +14,11 @@ import javax.persistence.*;
 public class Service implements Serializable {
 	   
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private boolean deleted;	
 	@JoinColumn(name = "Id_Zone")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Zone zone;
 	@Temporal(value = TemporalType.DATE)
 	@Column(name = "Start_Date")
@@ -27,18 +28,18 @@ public class Service implements Serializable {
 	@Column(name = "Farm_Name")
 	private String farmName;
 	@Column(name = "Pay_Number")
-	private long payNumber;	
+	private long payNumber;
 	@JoinColumn(name = "id_fare")	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Fare fare;	
 	@JoinColumn(name = "id_user")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private User user;
 	@JoinColumn(name = "Id_Status")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private ServiceStatus status;	
 	@JoinColumn(name = "Id_Service_Type")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private ServiceType type;
 	private static final long serialVersionUID = 1L;
 

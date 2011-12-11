@@ -2,6 +2,7 @@ package com.sanisidro.to;
 
 import java.util.Calendar;
 
+import com.sanisidro.annotation.ModelField;
 import com.sanisidro.entity.Fare;
 import com.sanisidro.entity.Service;
 
@@ -13,7 +14,8 @@ public class MeterTO {
 	private double price;
 	private double payNumber;
 	private String comments;
-	private Fare addMeterFare;
+	@ModelField(entityClass = Fare.class)
+	private FareTO addMeterFare;
 	private Service service;
 	private double maxMeters;
 
@@ -59,10 +61,10 @@ public class MeterTO {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	public Fare getAddMeterFare() {
+	public FareTO getAddMeterFare() {
 		return addMeterFare;
 	}
-	public void setAddMeterFare(Fare addMeterFare) {
+	public void setAddMeterFare(FareTO addMeterFare) {
 		this.addMeterFare = addMeterFare;
 	}
 	public double getMaxMeters() {

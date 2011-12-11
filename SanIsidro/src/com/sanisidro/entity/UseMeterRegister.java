@@ -17,6 +17,7 @@ public class UseMeterRegister implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
 	private long id;
 	@Column(name = "Count_Meter")
@@ -24,8 +25,9 @@ public class UseMeterRegister implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "Date_Register")
 	private Calendar dateRegister;
-	@Column(name = "Id_Meter")
-	private long meterId;
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "Id_Meter")
+	private Meter meter;
   
 	public long getId() {
 		return this.id;
@@ -49,11 +51,11 @@ public class UseMeterRegister implements Serializable {
 		this.dateRegister = dateRegister;
 	}
 
-	public long getMeterId() {
-		return meterId;
+	public Meter getMeter() {
+		return meter;
 	}
 
-	public void setMeterId(long meterId) {
-		this.meterId = meterId;
+	public void setMeter(Meter meter) {
+		this.meter = meter;
 	}
 }

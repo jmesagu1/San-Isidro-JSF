@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "customer")
 public class User{
 	
-	@Id	
+	@Id
 	private long dni;
 	@Column(name="User_Name")
 	private String name;
