@@ -16,6 +16,7 @@ import javax.persistence.Table;
 @Table(name = "customer")
 public class User{
 	
+
 	@Id	 
 	private long id_user;
 	private long dni;

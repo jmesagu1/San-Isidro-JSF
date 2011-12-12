@@ -5,6 +5,8 @@ import java.util.Calendar;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,6 +24,7 @@ import javax.persistence.TemporalType;
 public class Meter 
 {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@Temporal(value=TemporalType.DATE)
 	@Column(name="Date_Bought")
@@ -32,11 +35,11 @@ public class Meter
 	@Column(name="Pay_Number")
 	private double payNumber;
 	private String comments;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_fare")	
 	private Fare addMeterFare;
 
-	@OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_service")
 	private Service service;
 	
