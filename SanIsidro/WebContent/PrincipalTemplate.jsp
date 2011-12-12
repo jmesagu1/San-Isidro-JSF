@@ -26,6 +26,11 @@ if (session.getAttribute("user") != null)
 	</div>
 	<%
 	}
+	else
+	{
+		response.sendRedirect("/LoginRequired.jsp");
+		return;				
+	}
  %>
 
 

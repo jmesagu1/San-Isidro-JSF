@@ -21,5 +21,6 @@
 </body>
 </html>
 <%
-session.invalidate();
+	session.setAttribute("user", null);
+	session.invalidate();
 %>

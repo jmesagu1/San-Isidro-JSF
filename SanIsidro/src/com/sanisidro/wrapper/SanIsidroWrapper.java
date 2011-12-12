@@ -139,9 +139,14 @@ public class SanIsidroWrapper {
 		return new MeterManager().createMeter(meter);
 	}
 	
-	public UserTO createUser(UserTO userTO)
+	public UserTO createUser(UserTO userTO) throws Exception
 	{
 		return UserManager.getInstance().createUser(userTO);
+	}
+	
+	public UserTO updateUser(UserTO userTO) throws Exception
+	{
+		return UserManager.getInstance().updateUser(userTO);
 	}
 	
 	public UseMeterRegisterTO createUseMeterRegister(UseMeterRegisterTO to) {
@@ -152,8 +157,8 @@ public class SanIsidroWrapper {
 		return new MeterManager().findMeter(meterId);
 	}
 	
-	public List<UserTO> getAllCustomers ()
+	public List<UserTO> getAllCustomers (int first, int maxResutl)
 	{
-		return UserManager.getInstance().getAllCustomers();
+		return UserManager.getInstance().getAllCustomers(first, maxResutl);
 	}
 }

@@ -1,7 +1,6 @@
 package com.sanisidro.manager;
 
 import java.util.List;
-
 import com.sanisidro.service.UserService;
 import com.sanisidro.to.UserTO;
 
@@ -12,13 +11,18 @@ public class UserManager
 		return new UserManager();
 	}
 	
-	public UserTO createUser(UserTO userTO)
-	{
+	public UserTO createUser(UserTO userTO) throws Exception
+	{		
 		return UserService.createUser(userTO);
 	}
 	
-	public List<UserTO> getAllCustomers ()
+	public UserTO updateUser(UserTO userTO) throws Exception
+	{		
+		return UserService.updateUser(userTO);
+	}
+	
+	public List<UserTO> getAllCustomers (int first, int maxResutl)
 	{
-		return	UserService.getAllCustomers();
+		return	UserService.getAllCustomers(first, maxResutl);
 	}
 }

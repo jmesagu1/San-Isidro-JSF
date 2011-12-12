@@ -5,6 +5,7 @@ import com.sanisidro.entity.UserType;
 
 public class UserTO {
 
+	private long id_user;
 	private long dni;
 	private String name;
 	private String surname;
@@ -70,6 +71,14 @@ public class UserTO {
 
 	public void setEditable(boolean editable) {
 		this.editable = editable;
+	}
+
+	public long getId_user() {
+		return id_user;
+	}
+
+	public void setId_user(long id_user) {
+		this.id_user = id_user;
 	}
 	
 }

@@ -16,7 +16,8 @@ import javax.persistence.Table;
 @Table(name = "customer")
 public class User{
 	
-	@Id	
+	@Id	 
+	private long id_user;
 	private long dni;
 	@Column(name="User_Name")
 	private String name;
@@ -77,5 +78,13 @@ public class User{
 	}
 	public void setType(UserType type) {
 		this.type = type;
+	}
+
+	public long getId_user() {
+		return id_user;
+	}
+
+	public void setId_user(long id_user) {
+		this.id_user = id_user;
 	}
 }
