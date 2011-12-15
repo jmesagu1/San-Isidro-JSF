@@ -18,8 +18,8 @@ public class SearchCustomerMB
 	private Long idCurrent;	
 	
 	// Paging.
-	private int totalRows;
-    private int firstRow;
+	private long totalRows;
+    private long firstRow;
     private int rowsPerPage;
     private int totalPages;
     private int pageRange;
@@ -50,7 +50,7 @@ public class SearchCustomerMB
         return "";
     }
     
-    private void page(int firstRow) {
+    private void page(long firstRow) {
         this.firstRow = firstRow;
         init(firstRow, rowsPerPage);
     }
@@ -78,16 +78,22 @@ public class SearchCustomerMB
         firstRow = 0;
 		init(firstRow, rowsPerPage);
 	}	
-	public void init(int first, int maxResutl)
+	public void init(long first, long maxResutl) 
 	{		
-		customers = SanIsidroWrapper.getInstance().getAllCustomers(first, maxResutl);
-		//TODO: TotalRows
-		totalRows = 150;
-		userTipes.clear();
-		List<UserTypeTO> tos = SanIsidroWrapper.getInstance().getAllUserTypes();
-		for (UserTypeTO u : tos)
+		try
 		{
-			userTipes.add(new SelectItem(u.getId(), u.getName()));
+			customers = SanIsidroWrapper.getInstance().getAllCustomers((int)first, (int)maxResutl);
+			totalRows = SanIsidroWrapper.getInstance().coutUsers();
+			userTipes.clear();
+			List<UserTypeTO> tos = SanIsidroWrapper.getInstance().getAllUserTypes();
+			for (UserTypeTO u : tos)
+			{
+				userTipes.add(new SelectItem(u.getId(), u.getName()));
+			}
+		}
+		catch (Exception e)
+		{
+			message = e.getMessage();
 		}
 	}
 	
@@ -161,11 +167,11 @@ public class SearchCustomerMB
 		this.messageSuccess = messageSuccess;
 	}
 
-	public int getFirstRow() {
+	public long getFirstRow() {
 		return firstRow;
 	}
 
-	public void setFirstRow(int firstRow) {
+	public void setFirstRow(long firstRow) {
 		this.firstRow = firstRow;
 	}
 
@@ -209,11 +215,11 @@ public class SearchCustomerMB
 		this.currentPage = currentPage;
 	}
 
-	public int getTotalRows() {
+	public long getTotalRows() {
 		return totalRows;
 	}
 
-	public void setTotalRows(int totalRows) {
+	public void setTotalRows(long totalRows) {
 		this.totalRows = totalRows;
 	}	
 	

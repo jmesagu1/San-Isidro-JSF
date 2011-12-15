@@ -161,4 +161,9 @@ public class SanIsidroWrapper {
 	{
 		return UserManager.getInstance().getAllCustomers(first, maxResutl);
 	}
+	
+	public  long coutUsers () throws Exception
+	{
+		return UserManager.coutUsers();
+	}
 }

@@ -18,7 +18,7 @@ if (session.getAttribute("user") != null)
 		}
 		else
 		{
-			p = "UserHome.jsp";
+			p = "HomeUser.jsp";
 		}
 	
 	%>

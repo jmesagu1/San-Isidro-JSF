@@ -25,4 +25,9 @@ public class UserManager
 	{
 		return	UserService.getAllCustomers(first, maxResutl);
 	}
+	
+	public static long coutUsers () throws Exception
+	{
+		return UserService.coutUsers();
+	}
 }

@@ -16,6 +16,24 @@ import com.sanisidro.to.UserTypeTO;
 
 public class UserService {
 	
+	public static long coutUsers () throws Exception
+	{
+		long totalUsers = 0;
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("SanIsidro");
+		EntityManager em = emf.createEntityManager();			
+		Query query =  em.createQuery("select count(u) from User u");	
+		
+		
+		Number result = (Number) query.getSingleResult();
+		totalUsers = result.longValue();
+		if (em != null)
+		{
+			em.close();
+		}
+		
+		return totalUsers;
+	}
+	
 	public static List <UserTO> getAllCustomers(int first, int maxResutl)
 	{
 		List<UserTO> userTOs = new ArrayList<UserTO>();
