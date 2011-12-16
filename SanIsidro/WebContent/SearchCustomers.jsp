@@ -20,19 +20,19 @@
 	<h1>Búsqueda de Clientes</h1>
 	<h:panelGrid border="1" columns="2">
 					<h:outputLabel value="Documento: "></h:outputLabel>
-					<h:inputText value="#{searchCustomerMB.userSearch.dni}" required="true" requiredMessage="Ingrese un documento válido" >
+					<h:inputText value="#{searchCustomerMB.userDni}"  >
 						<f:convertNumber integerOnly="true"/>
 					</h:inputText>
 					<h:outputLabel value="Nombre:"></h:outputLabel>
-					<h:inputText value="#{searchCustomerMB.userSearch.name }" required="true" requiredMessage="Ingrese un nombre válido"></h:inputText>
+					<h:inputText value="#{searchCustomerMB.userSearch.name }" ></h:inputText>
 					<h:outputLabel value="Apellido:"></h:outputLabel>
-					<h:inputText value="#{searchCustomerMB.userSearch.surname }" required="true" requiredMessage="Ingrese un apellido válido"></h:inputText>
+					<h:inputText value="#{searchCustomerMB.userSearch.surname }" ></h:inputText>
 					<h:outputLabel value="Teléfono 1:"></h:outputLabel>
 					<h:inputText value="#{searchCustomerMB.userSearch.telephone1 }"></h:inputText>
 					<h:outputLabel value="Teléfono 2:"></h:outputLabel>
 					<h:inputText value="#{searchCustomerMB.userSearch.telephone2 }"></h:inputText>
 					<h:outputLabel value="Tipo:"></h:outputLabel>
-					<h:selectOneMenu value="#{searchCustomerMB.userTypeSelected }" required="true" requiredMessage="Seleccione un tipo de Usuario">
+					<h:selectOneMenu value="#{searchCustomerMB.userTypeSelected }">
 						<f:selectItem itemLabel="-- Seleccione --"/>
 						<f:selectItems value="#{searchCustomerMB.userTipes}"/>
 					</h:selectOneMenu>				

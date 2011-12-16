@@ -41,7 +41,7 @@ public class UserService {
 		{			
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("SanIsidro");
 			EntityManager em = emf.createEntityManager();			
-			Query query =  em.createQuery("select u from User");
+			Query query =  em.createQuery("select u from User u");
 			//query.setParameter("1", userTO.getDni() + "%");
 			query.setFirstResult(first);
 			query.setMaxResults(maxResutl);

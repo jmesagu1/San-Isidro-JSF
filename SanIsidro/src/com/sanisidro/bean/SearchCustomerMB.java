@@ -22,7 +22,17 @@ public class SearchCustomerMB
     private int currentPage;
     private int totalPages;
     private UserTO userSearch = new UserTO();
-	private Long userTypeSelected;	
+	private Long userTypeSelected;
+	
+	public Long getUserDni()
+	{
+		return userSearch.getDni() == 0 ? null : userSearch.getDni();
+	}
+	
+	public void setUserDni (Long dni)
+	{
+		userSearch.setDni(dni);
+	}
 	
 	public String search()
 	{

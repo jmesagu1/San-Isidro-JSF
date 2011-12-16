@@ -20,14 +20,14 @@
 			
 		
 				<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sanisidrodb"/>			
-				<property name="javax.persistence.jdbc.user" value="simroot"/>			
-			
+				<property name="javax.persistence.jdbc.user" value="root"/>			
+				<!--
 				<property name="javax.persistence.jdbc.password" value="%LB#Rvb7]Df$"/>
+			   	--> 
 			 
-			  <!-- 
-			
+		
 				<property name="javax.persistence.jdbc.password" value="284569"/>
-				-->  
+				 
 			
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
 		</properties>
