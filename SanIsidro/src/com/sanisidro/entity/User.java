@@ -28,7 +28,7 @@ public class User{
 	private String telephone1;
 	@Column(name="Telephone_2")
 	private String telephone2;
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="Type")
 	private UserType type;
    

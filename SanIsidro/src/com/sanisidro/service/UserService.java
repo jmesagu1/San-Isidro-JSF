@@ -34,14 +34,15 @@ public class UserService {
 		return totalUsers;
 	}
 	
-	public static List <UserTO> getAllCustomers(int first, int maxResutl)
+	public static List <UserTO> getAllCustomers(int first, int maxResutl, UserTO userTO)
 	{
 		List<UserTO> userTOs = new ArrayList<UserTO>();
 		try 
 		{			
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("SanIsidro");
 			EntityManager em = emf.createEntityManager();			
-			Query query =  em.createQuery("select u from User u");
+			Query query =  em.createQuery("select u from User");
+			//query.setParameter("1", userTO.getDni() + "%");
 			query.setFirstResult(first);
 			query.setMaxResults(maxResutl);
 			@SuppressWarnings("unchecked")

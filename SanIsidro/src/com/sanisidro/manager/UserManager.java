@@ -21,9 +21,9 @@ public class UserManager
 		return UserService.updateUser(userTO);
 	}
 	
-	public List<UserTO> getAllCustomers (int first, int maxResutl)
+	public List<UserTO> getAllCustomers (int first, int maxResutl, UserTO userTO)
 	{
-		return	UserService.getAllCustomers(first, maxResutl);
+		return	UserService.getAllCustomers(first, maxResutl, userTO);
 	}
 	
 	public static long coutUsers () throws Exception

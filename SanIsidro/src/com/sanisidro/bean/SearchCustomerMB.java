@@ -15,19 +15,28 @@ public class SearchCustomerMB
 	private String messageSuccess;
 	private ArrayList<SelectItem> userTipes = new ArrayList<SelectItem>();
 	private List<UserTO> customers = new ArrayList<UserTO>();
-	private Long idCurrent;	
-	
-	// Paging.
+	private Long idCurrent;
 	private long totalRows;
     private long firstRow;
-    private int rowsPerPage;
-    private int totalPages;
-    private int pageRange;
-    private Integer[] pages;
+    private long rowsPerPage;
     private int currentPage;
+    private int totalPages;
+    private UserTO userSearch = new UserTO();
+	private Long userTypeSelected;	
+	
+	public String search()
+	{
+		UserTypeTO userTypeTO = new UserTypeTO();
+		userTypeTO.setId(userTypeSelected);
+		UserTypeTO type = SanIsidroWrapper.getInstance().getUserTypeByID(userTypeTO);
+		userSearch.setType(type);	
+		page(0); 
+		init(firstRow, rowsPerPage);
+		return "";
+	}
     
     public String pageFirst() {
-        page(0);
+        page(0);        
         return "";
     }
 
@@ -52,6 +61,7 @@ public class SearchCustomerMB
     
     private void page(long firstRow) {
         this.firstRow = firstRow;
+        currentPage = (int)(firstRow / rowsPerPage) + 1;
         init(firstRow, rowsPerPage);
     }
 
@@ -73,18 +83,19 @@ public class SearchCustomerMB
 
 	public SearchCustomerMB()
 	{
-		rowsPerPage = 10; 
-        pageRange = 10;
+		rowsPerPage = 10;       
         firstRow = 0;
+        currentPage = 1;        
 		init(firstRow, rowsPerPage);
 	}	
 	public void init(long first, long maxResutl) 
 	{		
 		try
 		{
-			customers = SanIsidroWrapper.getInstance().getAllCustomers((int)first, (int)maxResutl);
+			customers = SanIsidroWrapper.getInstance().getAllCustomers((int)first, (int)maxResutl, userSearch);
 			totalRows = SanIsidroWrapper.getInstance().coutUsers();
 			userTipes.clear();
+			setTotalPages(totalRows % rowsPerPage == 0 ? (int)(totalRows / rowsPerPage) : (int)(totalRows / rowsPerPage) + 1); 
 			List<UserTypeTO> tos = SanIsidroWrapper.getInstance().getAllUserTypes();
 			for (UserTypeTO u : tos)
 			{
@@ -138,6 +149,16 @@ public class SearchCustomerMB
 		return "";
 	}
 	
+	
+	
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
 	public String getAllCustomers()
 	{
 		return "";
@@ -175,12 +196,22 @@ public class SearchCustomerMB
 		this.firstRow = firstRow;
 	}
 
-	public int getRowsPerPage() {
+	public long getRowsPerPage() {
 		return rowsPerPage;
 	}
 
-	public void setRowsPerPage(int rowsPerPage) {
+	public void setRowsPerPage(long rowsPerPage) {
 		this.rowsPerPage = rowsPerPage;
+	}	
+
+
+
+	public long getTotalRows() {
+		return totalRows;
+	}
+
+	public void setTotalRows(long totalRows) {
+		this.totalRows = totalRows;
 	}
 
 	public int getTotalPages() {
@@ -191,36 +222,20 @@ public class SearchCustomerMB
 		this.totalPages = totalPages;
 	}
 
-	public int getPageRange() {
-		return pageRange;
+	public UserTO getUserSearch() {
+		return userSearch;
 	}
 
-	public void setPageRange(int pageRange) {
-		this.pageRange = pageRange;
+	public void setUserSearch(UserTO userSearch) {
+		this.userSearch = userSearch;
 	}
 
-	public Integer[] getPages() {
-		return pages;
+	public Long getUserTypeSelected() {
+		return userTypeSelected;
 	}
 
-	public void setPages(Integer[] pages) {
-		this.pages = pages;
-	}
-
-	public int getCurrentPage() {
-		return currentPage;
-	}
-
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
-
-	public long getTotalRows() {
-		return totalRows;
-	}
-
-	public void setTotalRows(long totalRows) {
-		this.totalRows = totalRows;
+	public void setUserTypeSelected(Long userTypeSelected) {
+		this.userTypeSelected = userTypeSelected;
 	}	
 	
 	

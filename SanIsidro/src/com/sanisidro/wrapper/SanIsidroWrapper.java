@@ -157,9 +157,9 @@ public class SanIsidroWrapper {
 		return new MeterManager().findMeter(meterId);
 	}
 	
-	public List<UserTO> getAllCustomers (int first, int maxResutl)
+	public List<UserTO> getAllCustomers (int first, int maxResutl, UserTO userTO)
 	{
-		return UserManager.getInstance().getAllCustomers(first, maxResutl);
+		return UserManager.getInstance().getAllCustomers(first, maxResutl, userTO);
 	}
 	
 	public  long coutUsers () throws Exception
