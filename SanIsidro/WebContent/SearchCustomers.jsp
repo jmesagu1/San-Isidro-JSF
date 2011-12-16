@@ -17,6 +17,7 @@
 <f:view>
 <jsp:include page="PrincipalTemplate.jsp"></jsp:include>
 	<center>
+	<h:form id="form">
 	<h1>Búsqueda de Clientes</h1>
 	<h:panelGrid border="1" columns="2">
 					<h:outputLabel value="Documento: "></h:outputLabel>
@@ -36,10 +37,10 @@
 						<f:selectItem itemLabel="-- Seleccione --"/>
 						<f:selectItems value="#{searchCustomerMB.userTipes}"/>
 					</h:selectOneMenu>				
-				</h:panelGrid><h:form>
+				</h:panelGrid>
 				<h:commandButton value="Buscar" type="submit" action="#{searchCustomerMB.search}" ></h:commandButton>
-			</h:form>
-		<h:form id="form">
+			
+		
 				<h:inputHidden value="#{searchCustomerMB.idCurrent}" id="editId"></h:inputHidden>
 				<h:messages style="color: #FF0000"></h:messages>
 				<br><h:outputLabel value="#{searchCustomerMB.message}" style="color: #FF0000"></h:outputLabel>

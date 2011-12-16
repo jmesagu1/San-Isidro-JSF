@@ -25,8 +25,8 @@ public class SearchCustomerMB
 	private Long userTypeSelected;
 	
 	public Long getUserDni()
-	{
-		return userSearch.getDni() == 0 ? null : userSearch.getDni();
+	{	
+		return userSearch == null || (userSearch.getDni() == 0) ? null : userSearch.getDni();
 	}
 	
 	public void setUserDni (Long dni)
@@ -236,10 +236,6 @@ public class SearchCustomerMB
 		return userSearch;
 	}
 
-	public void setUserSearch(UserTO userSearch) {
-		this.userSearch = userSearch;
-	}
-
 	public Long getUserTypeSelected() {
 		return userTypeSelected;
 	}
@@ -247,6 +243,5 @@ public class SearchCustomerMB
 	public void setUserTypeSelected(Long userTypeSelected) {
 		this.userTypeSelected = userTypeSelected;
 	}	
-	
 	
 }
