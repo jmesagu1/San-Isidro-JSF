@@ -10,6 +10,7 @@ import com.sanisidro.manager.MeterManager;
 import com.sanisidro.manager.ServiceFareUserManager;
 import com.sanisidro.manager.ServiceStatusManager;
 import com.sanisidro.manager.ServiceTypeManager;
+import com.sanisidro.manager.UseChargeRegisterManager;
 import com.sanisidro.manager.UseMeterRegisterManager;
 import com.sanisidro.manager.UserManager;
 import com.sanisidro.manager.UserTypeManager;
@@ -155,5 +156,9 @@ public class SanIsidroWrapper {
 	public List<UserTO> getAllCustomers ()
 	{
 		return UserManager.getInstance().getAllCustomers();
+	}
+	
+	public boolean creteUseChargeRegisters() {
+		return new UseChargeRegisterManager().registerUseCharges();
 	}
 }
