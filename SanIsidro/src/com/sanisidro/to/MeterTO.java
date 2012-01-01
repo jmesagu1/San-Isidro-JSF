@@ -16,7 +16,8 @@ public class MeterTO {
 	private String comments;
 	@ModelField(entityClass = Fare.class)
 	private FareTO addMeterFare;
-	private Service service;
+	@ModelField(entityClass = Service.class)
+	private ServiceTO service;
 	private double maxMeters;
 
 	public long getId() {
@@ -73,10 +74,10 @@ public class MeterTO {
 	public void setMaxMeters(double maxMeters) {
 		this.maxMeters = maxMeters;
 	}
-	public Service getService() {
+	public ServiceTO getService() {
 		return service;
 	}
-	public void setService(Service service) {
+	public void setService(ServiceTO service) {
 		this.service = service;
 	}
 }
