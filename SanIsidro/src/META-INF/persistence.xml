@@ -15,6 +15,7 @@
 		<class>com.sanisidro.entity.ServiceStatus</class>
 		<class>com.sanisidro.entity.UserLogin</class>
 		<class>com.sanisidro.entity.UseMeterRegister</class>
+		<class>com.sanisidro.entity.UseChargeRegister</class>
 		
 		<properties>
 			
