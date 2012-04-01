@@ -7,11 +7,12 @@ import java.util.List;
 
 
 /**
- * The persistent class for the zone database table.
+ * The persistent class for the usage_fare database table.
  * 
  */
 @Entity
-public class Zone implements Serializable {
+@Table(name="usage_fare")
+public class UsageFare implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -21,6 +22,9 @@ public class Zone implements Serializable {
     @Temporal( TemporalType.TIMESTAMP)
 	@Column(name="delete_date")
 	private Date deleteDate;
+
+	@Column(name="has_meter")
+	private byte hasMeter;
 
     @Temporal( TemporalType.TIMESTAMP)
 	@Column(name="insert_date")
@@ -33,8 +37,14 @@ public class Zone implements Serializable {
 	@Column(name="update_date")
 	private Date updateDate;
 
+	private double value;
+
+	//bi-directional many-to-many association to CustomerType
+	@ManyToMany(mappedBy="usageFares")
+	private List<CustomerType> customerTypes;
+
 	//bi-directional many-to-one association to Subscription
-	@OneToMany(mappedBy="zone")
+	@OneToMany(mappedBy="usageFare")
 	private List<Subscription> subscriptions;
 
 	//uni-directional many-to-one association to User
@@ -47,7 +57,7 @@ public class Zone implements Serializable {
 	@JoinColumn(name="id_user_update")
 	private User userUpdate;
 
-    public Zone() {
+    public UsageFare() {
     }
 
 	public String getId() {
@@ -64,6 +74,14 @@ public class Zone implements Serializable {
 
 	public void setDeleteDate(Date deleteDate) {
 		this.deleteDate = deleteDate;
+	}
+
+	public byte getHasMeter() {
+		return this.hasMeter;
+	}
+
+	public void setHasMeter(byte hasMeter) {
+		this.hasMeter = hasMeter;
 	}
 
 	public Date getInsertDate() {
@@ -90,6 +108,22 @@ public class Zone implements Serializable {
 		this.updateDate = updateDate;
 	}
 
+	public double getValue() {
+		return this.value;
+	}
+
+	public void setValue(double value) {
+		this.value = value;
+	}
+
+	public List<CustomerType> getCustomerTypes() {
+		return this.customerTypes;
+	}
+
+	public void setCustomerTypes(List<CustomerType> customerTypes) {
+		this.customerTypes = customerTypes;
+	}
+	
 	public List<Subscription> getSubscriptions() {
 		return this.subscriptions;
 	}

@@ -7,11 +7,12 @@ import java.util.List;
 
 
 /**
- * The persistent class for the zone database table.
+ * The persistent class for the fixed_charge database table.
  * 
  */
 @Entity
-public class Zone implements Serializable {
+@Table(name="fixed_charge")
+public class FixedCharge implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -26,16 +27,19 @@ public class Zone implements Serializable {
 	@Column(name="insert_date")
 	private Date insertDate;
 
-    @Lob()
-	private String name;
+	private byte paid;
 
     @Temporal( TemporalType.TIMESTAMP)
 	@Column(name="update_date")
 	private Date updateDate;
 
+	@Column(name="value_charge")
+	private double valueCharge;
+
 	//bi-directional many-to-one association to Subscription
-	@OneToMany(mappedBy="zone")
-	private List<Subscription> subscriptions;
+	@ManyToOne(cascade={CascadeType.MERGE}, fetch=FetchType.LAZY)
+	@JoinColumn(name="id_subscription")
+	private Subscription subscription;
 
 	//uni-directional many-to-one association to User
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -47,7 +51,16 @@ public class Zone implements Serializable {
 	@JoinColumn(name="id_user_update")
 	private User userUpdate;
 
-    public Zone() {
+	//bi-directional many-to-one association to Invoice
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_invoice")
+	private Invoice invoice;
+
+	//bi-directional many-to-one association to FixedChargePayout
+	@OneToMany(mappedBy="fixedCharge")
+	private List<FixedChargePayout> fixedChargePayouts;
+
+    public FixedCharge() {
     }
 
 	public String getId() {
@@ -74,12 +87,12 @@ public class Zone implements Serializable {
 		this.insertDate = insertDate;
 	}
 
-	public String getName() {
-		return this.name;
+	public byte getPaid() {
+		return this.paid;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setPaid(byte paid) {
+		this.paid = paid;
 	}
 
 	public Date getUpdateDate() {
@@ -90,12 +103,20 @@ public class Zone implements Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public List<Subscription> getSubscriptions() {
-		return this.subscriptions;
+	public double getValueCharge() {
+		return this.valueCharge;
 	}
 
-	public void setSubscriptions(List<Subscription> subscriptions) {
-		this.subscriptions = subscriptions;
+	public void setValueCharge(double valueCharge) {
+		this.valueCharge = valueCharge;
+	}
+
+	public Subscription getSubscription() {
+		return this.subscription;
+	}
+
+	public void setSubscription(Subscription subscription) {
+		this.subscription = subscription;
 	}
 	
 	public User getUserInsert() {
@@ -112,6 +133,22 @@ public class Zone implements Serializable {
 
 	public void setUserUpdate(User userUpdate) {
 		this.userUpdate = userUpdate;
+	}
+	
+	public Invoice getInvoice() {
+		return this.invoice;
+	}
+
+	public void setInvoice(Invoice invoice) {
+		this.invoice = invoice;
+	}
+	
+	public List<FixedChargePayout> getFixedChargePayouts() {
+		return this.fixedChargePayouts;
+	}
+
+	public void setFixedChargePayouts(List<FixedChargePayout> fixedChargePayouts) {
+		this.fixedChargePayouts = fixedChargePayouts;
 	}
 	
 }

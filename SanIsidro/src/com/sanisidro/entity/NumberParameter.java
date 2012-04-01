@@ -3,15 +3,15 @@ package com.sanisidro.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 
 /**
- * The persistent class for the zone database table.
+ * The persistent class for the number_parameter database table.
  * 
  */
 @Entity
-public class Zone implements Serializable {
+@Table(name="number_parameter")
+public class NumberParameter implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -27,15 +27,13 @@ public class Zone implements Serializable {
 	private Date insertDate;
 
     @Lob()
-	private String name;
+	private String key;
 
     @Temporal( TemporalType.TIMESTAMP)
 	@Column(name="update_date")
 	private Date updateDate;
 
-	//bi-directional many-to-one association to Subscription
-	@OneToMany(mappedBy="zone")
-	private List<Subscription> subscriptions;
+	private double value;
 
 	//uni-directional many-to-one association to User
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -47,7 +45,7 @@ public class Zone implements Serializable {
 	@JoinColumn(name="id_user_update")
 	private User userUpdate;
 
-    public Zone() {
+    public NumberParameter() {
     }
 
 	public String getId() {
@@ -74,12 +72,12 @@ public class Zone implements Serializable {
 		this.insertDate = insertDate;
 	}
 
-	public String getName() {
-		return this.name;
+	public String getKey() {
+		return this.key;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setKey(String key) {
+		this.key = key;
 	}
 
 	public Date getUpdateDate() {
@@ -90,14 +88,14 @@ public class Zone implements Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public List<Subscription> getSubscriptions() {
-		return this.subscriptions;
+	public double getValue() {
+		return this.value;
 	}
 
-	public void setSubscriptions(List<Subscription> subscriptions) {
-		this.subscriptions = subscriptions;
+	public void setValue(double value) {
+		this.value = value;
 	}
-	
+
 	public User getUserInsert() {
 		return this.userInsert;
 	}

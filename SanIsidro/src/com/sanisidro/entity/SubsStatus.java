@@ -2,16 +2,18 @@ package com.sanisidro.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
 
 /**
- * The persistent class for the zone database table.
+ * The persistent class for the subs_status database table.
  * 
  */
 @Entity
-public class Zone implements Serializable {
+@Table(name="subs_status")
+public class SubsStatus implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -22,9 +24,21 @@ public class Zone implements Serializable {
 	@Column(name="delete_date")
 	private Date deleteDate;
 
+    @Lob()
+	private String description;
+
+	@Column(name="id_user_insert")
+	private BigInteger idUserInsert;
+
+	@Column(name="id_user_update")
+	private BigInteger idUserUpdate;
+
     @Temporal( TemporalType.TIMESTAMP)
 	@Column(name="insert_date")
 	private Date insertDate;
+
+	@Column(name="is_chargeable")
+	private byte isChargeable;
 
     @Lob()
 	private String name;
@@ -34,20 +48,10 @@ public class Zone implements Serializable {
 	private Date updateDate;
 
 	//bi-directional many-to-one association to Subscription
-	@OneToMany(mappedBy="zone")
+	@OneToMany(mappedBy="status")
 	private List<Subscription> subscriptions;
 
-	//uni-directional many-to-one association to User
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_user_insert")
-	private User userInsert;
-
-	//uni-directional many-to-one association to User
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_user_update")
-	private User userUpdate;
-
-    public Zone() {
+    public SubsStatus() {
     }
 
 	public String getId() {
@@ -66,12 +70,44 @@ public class Zone implements Serializable {
 		this.deleteDate = deleteDate;
 	}
 
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public BigInteger getIdUserInsert() {
+		return this.idUserInsert;
+	}
+
+	public void setIdUserInsert(BigInteger idUserInsert) {
+		this.idUserInsert = idUserInsert;
+	}
+
+	public BigInteger getIdUserUpdate() {
+		return this.idUserUpdate;
+	}
+
+	public void setIdUserUpdate(BigInteger idUserUpdate) {
+		this.idUserUpdate = idUserUpdate;
+	}
+
 	public Date getInsertDate() {
 		return this.insertDate;
 	}
 
 	public void setInsertDate(Date insertDate) {
 		this.insertDate = insertDate;
+	}
+
+	public byte getIsChargeable() {
+		return this.isChargeable;
+	}
+
+	public void setIsChargeable(byte isChargeable) {
+		this.isChargeable = isChargeable;
 	}
 
 	public String getName() {
@@ -96,22 +132,6 @@ public class Zone implements Serializable {
 
 	public void setSubscriptions(List<Subscription> subscriptions) {
 		this.subscriptions = subscriptions;
-	}
-	
-	public User getUserInsert() {
-		return this.userInsert;
-	}
-
-	public void setUserInsert(User userInsert) {
-		this.userInsert = userInsert;
-	}
-	
-	public User getUserUpdate() {
-		return this.userUpdate;
-	}
-
-	public void setUserUpdate(User userUpdate) {
-		this.userUpdate = userUpdate;
 	}
 	
 }

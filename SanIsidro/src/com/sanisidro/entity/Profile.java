@@ -7,20 +7,23 @@ import java.util.List;
 
 
 /**
- * The persistent class for the zone database table.
+ * The persistent class for the profile database table.
  * 
  */
 @Entity
-public class Zone implements Serializable {
+public class Profile implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private String id;
+	private long id;
 
     @Temporal( TemporalType.TIMESTAMP)
 	@Column(name="delete_date")
 	private Date deleteDate;
+
+    @Lob()
+	private String description;
 
     @Temporal( TemporalType.TIMESTAMP)
 	@Column(name="insert_date")
@@ -33,28 +36,22 @@ public class Zone implements Serializable {
 	@Column(name="update_date")
 	private Date updateDate;
 
-	//bi-directional many-to-one association to Subscription
-	@OneToMany(mappedBy="zone")
-	private List<Subscription> subscriptions;
+	//bi-directional many-to-many association to Resource
+	@ManyToMany(mappedBy="profiles")
+	private List<Resource> resources;
 
-	//uni-directional many-to-one association to User
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_user_insert")
-	private User userInsert;
+	//bi-directional many-to-one association to User
+	@OneToMany(mappedBy="profile")
+	private List<User> users;
 
-	//uni-directional many-to-one association to User
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_user_update")
-	private User userUpdate;
-
-    public Zone() {
+    public Profile() {
     }
 
-	public String getId() {
+	public long getId() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -64,6 +61,14 @@ public class Zone implements Serializable {
 
 	public void setDeleteDate(Date deleteDate) {
 		this.deleteDate = deleteDate;
+	}
+
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Date getInsertDate() {
@@ -90,28 +95,20 @@ public class Zone implements Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public List<Subscription> getSubscriptions() {
-		return this.subscriptions;
+	public List<Resource> getResources() {
+		return this.resources;
 	}
 
-	public void setSubscriptions(List<Subscription> subscriptions) {
-		this.subscriptions = subscriptions;
+	public void setResources(List<Resource> resources) {
+		this.resources = resources;
 	}
 	
-	public User getUserInsert() {
-		return this.userInsert;
+	public List<User> getUsers() {
+		return this.users;
 	}
 
-	public void setUserInsert(User userInsert) {
-		this.userInsert = userInsert;
-	}
-	
-	public User getUserUpdate() {
-		return this.userUpdate;
-	}
-
-	public void setUserUpdate(User userUpdate) {
-		this.userUpdate = userUpdate;
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 	
 }

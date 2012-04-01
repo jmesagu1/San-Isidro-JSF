@@ -7,11 +7,12 @@ import java.util.List;
 
 
 /**
- * The persistent class for the zone database table.
+ * The persistent class for the general_fare database table.
  * 
  */
 @Entity
-public class Zone implements Serializable {
+@Table(name="general_fare")
+public class GeneralFare implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -29,13 +30,13 @@ public class Zone implements Serializable {
     @Lob()
 	private String name;
 
+	private byte smmlv;
+
     @Temporal( TemporalType.TIMESTAMP)
 	@Column(name="update_date")
 	private Date updateDate;
 
-	//bi-directional many-to-one association to Subscription
-	@OneToMany(mappedBy="zone")
-	private List<Subscription> subscriptions;
+	private double value;
 
 	//uni-directional many-to-one association to User
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -47,7 +48,15 @@ public class Zone implements Serializable {
 	@JoinColumn(name="id_user_update")
 	private User userUpdate;
 
-    public Zone() {
+	//bi-directional many-to-one association to Subscription
+	@OneToMany(mappedBy="addMeterFare")
+	private List<Subscription> subscriptionsAddMeters;
+
+	//bi-directional many-to-one association to Subscription
+	@OneToMany(mappedBy="fixedMeterFare")
+	private List<Subscription> subscriptionsFixedMeterFares;
+
+    public GeneralFare() {
     }
 
 	public String getId() {
@@ -82,6 +91,14 @@ public class Zone implements Serializable {
 		this.name = name;
 	}
 
+	public byte getSmmlv() {
+		return this.smmlv;
+	}
+
+	public void setSmmlv(byte smmlv) {
+		this.smmlv = smmlv;
+	}
+
 	public Date getUpdateDate() {
 		return this.updateDate;
 	}
@@ -90,14 +107,14 @@ public class Zone implements Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public List<Subscription> getSubscriptions() {
-		return this.subscriptions;
+	public double getValue() {
+		return this.value;
 	}
 
-	public void setSubscriptions(List<Subscription> subscriptions) {
-		this.subscriptions = subscriptions;
+	public void setValue(double value) {
+		this.value = value;
 	}
-	
+
 	public User getUserInsert() {
 		return this.userInsert;
 	}
@@ -112,6 +129,22 @@ public class Zone implements Serializable {
 
 	public void setUserUpdate(User userUpdate) {
 		this.userUpdate = userUpdate;
+	}
+	
+	public List<Subscription> getSubscriptionsAddMeters() {
+		return this.subscriptionsAddMeters;
+	}
+
+	public void setSubscriptionsAddMeters(List<Subscription> subscriptionsAddMeters) {
+		this.subscriptionsAddMeters = subscriptionsAddMeters;
+	}
+	
+	public List<Subscription> getSubscriptionsFixedMeterFares() {
+		return this.subscriptionsFixedMeterFares;
+	}
+
+	public void setSubscriptionsFixedMeterFares(List<Subscription> subscriptionsFixedMeterFares) {
+		this.subscriptionsFixedMeterFares = subscriptionsFixedMeterFares;
 	}
 	
 }

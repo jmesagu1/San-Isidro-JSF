@@ -1,91 +1,102 @@
 package com.sanisidro.entity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+
 
 /**
- * Entity implementation class for Entity: User
- *
+ * The persistent class for the user database table.
+ * 
  */
 @Entity
-@Table(name = "customer")
-public class User{
+public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private String id;
+
+    @Temporal( TemporalType.TIMESTAMP)
+	@Column(name="delete_date")
+	private Date deleteDate;
+
+    @Temporal( TemporalType.TIMESTAMP)
+	@Column(name="insert_date")
+	private Date insertDate;
+
+    @Lob()
+	private String password;
+
+    @Temporal( TemporalType.TIMESTAMP)
+	@Column(name="update_date")
+	private Date updateDate;
+
+    @Lob()
+	private String username;
+
+	//bi-directional many-to-one association to Profile
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_profile")
+	private Profile profile;
+
+    public User() {
+    }
+
+	public String getId() {
+		return this.id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Date getDeleteDate() {
+		return this.deleteDate;
+	}
+
+	public void setDeleteDate(Date deleteDate) {
+		this.deleteDate = deleteDate;
+	}
+
+	public Date getInsertDate() {
+		return this.insertDate;
+	}
+
+	public void setInsertDate(Date insertDate) {
+		this.insertDate = insertDate;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Date getUpdateDate() {
+		return this.updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public String getUsername() {
+		return this.username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Profile getProfile() {
+		return this.profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
 	
-
-	@Id	 
-	private long id_user;
-	private long dni;
-	@Column(name="User_Name")
-	private String name;
-	private String surname;
-	private boolean deleted;
-	@Column(name="Telephone_1")
-	private String telephone1;
-	@Column(name="Telephone_2")
-	private String telephone2;
-	@ManyToOne(cascade=CascadeType.MERGE)
-	@JoinColumn(name="Type")
-	private UserType type;
-   
-	public long getDni() {
-		return this.dni;
-	}
-
-	public void setDni(long dni) {
-		this.dni = dni;
-	}   
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}   
-	public String getSurname() {
-		return this.surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}   
-	public boolean getDeleted() {
-		return this.deleted;
-	}
-
-	public void setDeleted(boolean deleted) {
-		this.deleted = deleted;
-	}   
-	public String getTelephone1() {
-		return this.telephone1;
-	}
-
-	public void setTelephone1(String telephone1) {
-		this.telephone1 = telephone1;
-	}   
-	public String getTelephone2() {
-		return this.telephone2;
-	}
-
-	public void setTelephone2(String telephone2) {
-		this.telephone2 = telephone2;
-	}
-	public UserType getType() {
-		return type;
-	}
-	public void setType(UserType type) {
-		this.type = type;
-	}
-
-	public long getId_user() {
-		return id_user;
-	}
-
-	public void setId_user(long id_user) {
-		this.id_user = id_user;
-	}
 }

@@ -7,11 +7,11 @@ import java.util.List;
 
 
 /**
- * The persistent class for the zone database table.
+ * The persistent class for the customer database table.
  * 
  */
 @Entity
-public class Zone implements Serializable {
+public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -22,20 +22,34 @@ public class Zone implements Serializable {
 	@Column(name="delete_date")
 	private Date deleteDate;
 
+    @Lob()
+	private String dni;
+
     @Temporal( TemporalType.TIMESTAMP)
 	@Column(name="insert_date")
 	private Date insertDate;
 
     @Lob()
+	private String lastname;
+
+    @Lob()
 	private String name;
+
+    @Lob()
+	@Column(name="telephone_1")
+	private String telephone1;
+
+	@Column(name="telephone_2")
+	private String telephone2;
 
     @Temporal( TemporalType.TIMESTAMP)
 	@Column(name="update_date")
 	private Date updateDate;
 
-	//bi-directional many-to-one association to Subscription
-	@OneToMany(mappedBy="zone")
-	private List<Subscription> subscriptions;
+	//bi-directional many-to-one association to CustomerType
+	@ManyToOne(cascade={CascadeType.MERGE}, fetch=FetchType.LAZY)
+	@JoinColumn(name="id_customer_type")
+	private CustomerType type;
 
 	//uni-directional many-to-one association to User
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -47,7 +61,11 @@ public class Zone implements Serializable {
 	@JoinColumn(name="id_user_update")
 	private User userUpdate;
 
-    public Zone() {
+	//bi-directional many-to-one association to Subscription
+	@OneToMany(mappedBy="customer")
+	private List<Subscription> subscriptions;
+
+    public Customer() {
     }
 
 	public String getId() {
@@ -66,12 +84,28 @@ public class Zone implements Serializable {
 		this.deleteDate = deleteDate;
 	}
 
+	public String getDni() {
+		return this.dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
 	public Date getInsertDate() {
 		return this.insertDate;
 	}
 
 	public void setInsertDate(Date insertDate) {
 		this.insertDate = insertDate;
+	}
+
+	public String getLastname() {
+		return this.lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getName() {
@@ -82,6 +116,22 @@ public class Zone implements Serializable {
 		this.name = name;
 	}
 
+	public String getTelephone1() {
+		return this.telephone1;
+	}
+
+	public void setTelephone1(String telephone1) {
+		this.telephone1 = telephone1;
+	}
+
+	public String getTelephone2() {
+		return this.telephone2;
+	}
+
+	public void setTelephone2(String telephone2) {
+		this.telephone2 = telephone2;
+	}
+
 	public Date getUpdateDate() {
 		return this.updateDate;
 	}
@@ -90,12 +140,12 @@ public class Zone implements Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public List<Subscription> getSubscriptions() {
-		return this.subscriptions;
+	public CustomerType getType() {
+		return this.type;
 	}
 
-	public void setSubscriptions(List<Subscription> subscriptions) {
-		this.subscriptions = subscriptions;
+	public void setType(CustomerType type) {
+		this.type = type;
 	}
 	
 	public User getUserInsert() {
@@ -112,6 +162,14 @@ public class Zone implements Serializable {
 
 	public void setUserUpdate(User userUpdate) {
 		this.userUpdate = userUpdate;
+	}
+	
+	public List<Subscription> getSubscriptions() {
+		return this.subscriptions;
+	}
+
+	public void setSubscriptions(List<Subscription> subscriptions) {
+		this.subscriptions = subscriptions;
 	}
 	
 }

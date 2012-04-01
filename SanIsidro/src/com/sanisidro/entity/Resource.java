@@ -7,11 +7,11 @@ import java.util.List;
 
 
 /**
- * The persistent class for the zone database table.
+ * The persistent class for the resource database table.
  * 
  */
 @Entity
-public class Zone implements Serializable {
+public class Resource implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -22,32 +22,34 @@ public class Zone implements Serializable {
 	@Column(name="delete_date")
 	private Date deleteDate;
 
+    @Lob()
+	private String description;
+
     @Temporal( TemporalType.TIMESTAMP)
 	@Column(name="insert_date")
 	private Date insertDate;
 
     @Lob()
-	private String name;
+	private String path;
 
     @Temporal( TemporalType.TIMESTAMP)
 	@Column(name="update_date")
 	private Date updateDate;
 
-	//bi-directional many-to-one association to Subscription
-	@OneToMany(mappedBy="zone")
-	private List<Subscription> subscriptions;
+	//bi-directional many-to-many association to Profile
+    @ManyToMany
+	@JoinTable(
+		name="resource_profile"
+		, joinColumns={
+			@JoinColumn(name="id_resource")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="id_profile")
+			}
+		)
+	private List<Profile> profiles;
 
-	//uni-directional many-to-one association to User
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_user_insert")
-	private User userInsert;
-
-	//uni-directional many-to-one association to User
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_user_update")
-	private User userUpdate;
-
-    public Zone() {
+    public Resource() {
     }
 
 	public String getId() {
@@ -66,6 +68,14 @@ public class Zone implements Serializable {
 		this.deleteDate = deleteDate;
 	}
 
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public Date getInsertDate() {
 		return this.insertDate;
 	}
@@ -74,12 +84,12 @@ public class Zone implements Serializable {
 		this.insertDate = insertDate;
 	}
 
-	public String getName() {
-		return this.name;
+	public String getPath() {
+		return this.path;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 	public Date getUpdateDate() {
@@ -90,28 +100,12 @@ public class Zone implements Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public List<Subscription> getSubscriptions() {
-		return this.subscriptions;
+	public List<Profile> getProfiles() {
+		return this.profiles;
 	}
 
-	public void setSubscriptions(List<Subscription> subscriptions) {
-		this.subscriptions = subscriptions;
-	}
-	
-	public User getUserInsert() {
-		return this.userInsert;
-	}
-
-	public void setUserInsert(User userInsert) {
-		this.userInsert = userInsert;
-	}
-	
-	public User getUserUpdate() {
-		return this.userUpdate;
-	}
-
-	public void setUserUpdate(User userUpdate) {
-		this.userUpdate = userUpdate;
+	public void setProfiles(List<Profile> profiles) {
+		this.profiles = profiles;
 	}
 	
 }

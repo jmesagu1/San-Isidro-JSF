@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-	<persistence-unit name="SanIsidro" transaction-type="RESOURCE_LOCAL">
-		<class>com.sanisidro.entity.Fare</class>
+	<persistence-unit name="Sample" transaction-type="RESOURCE_LOCAL">
+		<class>com.sanisidro.entity.Customer</class>
+		<class>com.sanisidro.entity.CustomerType</class>
+		<class>com.sanisidro.entity.FixedCharge</class>
+		<class>com.sanisidro.entity.FixedChargePayout</class>
+		<class>com.sanisidro.entity.GeneralFare</class>
+		<class>com.sanisidro.entity.Invoice</class>
+		<class>com.sanisidro.entity.Invoice_note</class>
 		<class>com.sanisidro.entity.Meter</class>
-		<class>com.sanisidro.entity.MeterCharge</class>
-		<class>com.sanisidro.entity.MeterPay</class>
-		<class>com.sanisidro.entity.Service</class>
-		<class>com.sanisidro.entity.ServiceFareUser</class>
-		<class>com.sanisidro.entity.ServiceStateRegister</class>
-		<class>com.sanisidro.entity.ServiceType</class>
+		<class>com.sanisidro.entity.MeterFeeReg</class>
+		<class>com.sanisidro.entity.NumberParameter</class>
+		<class>com.sanisidro.entity.OtherCharge</class>
+		<class>com.sanisidro.entity.OtherChargePayout</class>
+		<class>com.sanisidro.entity.Profile</class>
+		<class>com.sanisidro.entity.Resource</class>
+		<class>com.sanisidro.entity.SubsMeter</class>
+		<class>com.sanisidro.entity.SubsStatus</class>
+		<class>com.sanisidro.entity.Subscription</class>
+		<class>com.sanisidro.entity.SubscriptionFeeReg</class>
+		<class>com.sanisidro.entity.TextParameter</class>
+		<class>com.sanisidro.entity.UsageCharge</class>
+		<class>com.sanisidro.entity.UsageChargePayout</class>
+		<class>com.sanisidro.entity.UsageFare</class>
+		<class>com.sanisidro.entity.UsageMeterReg</class>
 		<class>com.sanisidro.entity.User</class>
-		<class>com.sanisidro.entity.UserType</class>
 		<class>com.sanisidro.entity.Zone</class>
-		<class>com.sanisidro.entity.ServiceStatus</class>
-		<class>com.sanisidro.entity.UserLogin</class>
-		<class>com.sanisidro.entity.UseMeterRegister</class>
-		<class>com.sanisidro.entity.UseChargeRegister</class>
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/sanisidrodb"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.43.72/sanisidrodb"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>
 			<!-- 
 				<property name="javax.persistence.jdbc.password" value="oTtbp@va3_Nl"/>

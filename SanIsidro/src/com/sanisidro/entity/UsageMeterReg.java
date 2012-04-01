@@ -3,19 +3,19 @@ package com.sanisidro.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 
 /**
- * The persistent class for the zone database table.
+ * The persistent class for the usage_meter_reg database table.
  * 
  */
 @Entity
-public class Zone implements Serializable {
+@Table(name="usage_meter_reg")
+public class UsageMeterReg implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)	
 	private String id;
 
     @Temporal( TemporalType.TIMESTAMP)
@@ -26,16 +26,21 @@ public class Zone implements Serializable {
 	@Column(name="insert_date")
 	private Date insertDate;
 
-    @Lob()
-	private String name;
+	@Column(name="meter_register")
+	private double meterRegister;
 
     @Temporal( TemporalType.TIMESTAMP)
 	@Column(name="update_date")
 	private Date updateDate;
 
-	//bi-directional many-to-one association to Subscription
-	@OneToMany(mappedBy="zone")
-	private List<Subscription> subscriptions;
+	//bi-directional one-to-one association to UsageCharge
+	@OneToOne(mappedBy="usageMeterReg", fetch=FetchType.LAZY)
+	private UsageCharge usageCharge;
+
+	//bi-directional many-to-one association to Meter
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_meter")
+	private Meter meter;
 
 	//uni-directional many-to-one association to User
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -47,7 +52,7 @@ public class Zone implements Serializable {
 	@JoinColumn(name="id_user_update")
 	private User userUpdate;
 
-    public Zone() {
+    public UsageMeterReg() {
     }
 
 	public String getId() {
@@ -74,12 +79,12 @@ public class Zone implements Serializable {
 		this.insertDate = insertDate;
 	}
 
-	public String getName() {
-		return this.name;
+	public double getMeterRegister() {
+		return this.meterRegister;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setMeterRegister(double meterRegister) {
+		this.meterRegister = meterRegister;
 	}
 
 	public Date getUpdateDate() {
@@ -90,12 +95,20 @@ public class Zone implements Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public List<Subscription> getSubscriptions() {
-		return this.subscriptions;
+	public UsageCharge getUsageCharge() {
+		return this.usageCharge;
 	}
 
-	public void setSubscriptions(List<Subscription> subscriptions) {
-		this.subscriptions = subscriptions;
+	public void setUsageCharge(UsageCharge usageCharge) {
+		this.usageCharge = usageCharge;
+	}
+	
+	public Meter getMeter() {
+		return this.meter;
+	}
+
+	public void setMeter(Meter meter) {
+		this.meter = meter;
 	}
 	
 	public User getUserInsert() {

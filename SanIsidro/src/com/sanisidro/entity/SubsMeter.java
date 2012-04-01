@@ -3,39 +3,45 @@ package com.sanisidro.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 
 /**
- * The persistent class for the zone database table.
+ * The persistent class for the subs_meter database table.
  * 
  */
 @Entity
-public class Zone implements Serializable {
+@Table(name="subs_meter")
+public class SubsMeter implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private String id;
+	@Column(name="id_meter")
+	private String idMeter;
 
-    @Temporal( TemporalType.TIMESTAMP)
-	@Column(name="delete_date")
-	private Date deleteDate;
+    @Lob()
+	private String comment;
 
     @Temporal( TemporalType.TIMESTAMP)
 	@Column(name="insert_date")
 	private Date insertDate;
 
-    @Lob()
-	private String name;
+	@Column(name="is_current")
+	private byte isCurrent;
 
     @Temporal( TemporalType.TIMESTAMP)
 	@Column(name="update_date")
 	private Date updateDate;
 
 	//bi-directional many-to-one association to Subscription
-	@OneToMany(mappedBy="zone")
-	private List<Subscription> subscriptions;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_subscription")
+	private Subscription subscription;
+
+	//bi-directional one-to-one association to Meter
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_meter", insertable = false, updatable = false)
+	private Meter meter;
 
 	//uni-directional many-to-one association to User
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -47,23 +53,23 @@ public class Zone implements Serializable {
 	@JoinColumn(name="id_user_update")
 	private User userUpdate;
 
-    public Zone() {
+    public SubsMeter() {
     }
 
-	public String getId() {
-		return this.id;
+	public String getIdMeter() {
+		return this.idMeter;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setIdMeter(String idMeter) {
+		this.idMeter = idMeter;
 	}
 
-	public Date getDeleteDate() {
-		return this.deleteDate;
+	public String getComment() {
+		return this.comment;
 	}
 
-	public void setDeleteDate(Date deleteDate) {
-		this.deleteDate = deleteDate;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	public Date getInsertDate() {
@@ -74,12 +80,12 @@ public class Zone implements Serializable {
 		this.insertDate = insertDate;
 	}
 
-	public String getName() {
-		return this.name;
+	public byte getIsCurrent() {
+		return this.isCurrent;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setIsCurrent(byte isCurrent) {
+		this.isCurrent = isCurrent;
 	}
 
 	public Date getUpdateDate() {
@@ -90,12 +96,20 @@ public class Zone implements Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public List<Subscription> getSubscriptions() {
-		return this.subscriptions;
+	public Subscription getSubscription() {
+		return this.subscription;
 	}
 
-	public void setSubscriptions(List<Subscription> subscriptions) {
-		this.subscriptions = subscriptions;
+	public void setSubscription(Subscription subscription) {
+		this.subscription = subscription;
+	}
+	
+	public Meter getMeter() {
+		return this.meter;
+	}
+
+	public void setMeter(Meter meter) {
+		this.meter = meter;
 	}
 	
 	public User getUserInsert() {

@@ -1,122 +1,194 @@
 package com.sanisidro.entity;
 
-import java.util.Calendar;
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigInteger;
+import java.util.Date;
+import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
- * Entity implementation class for Entity: Meter
- *
+ * The persistent class for the meter database table.
+ * 
  */
 @Entity
-@Table (name = "meter")
-public class Meter 
-{
+public class Meter implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	@Temporal(value=TemporalType.DATE)
-	@Column(name="Date_Bought")
-	private Calendar dateBought;
-	private String serie;
-	private boolean deleted;
-	private double price;
-	@Column(name="Pay_Number")
-	private double payNumber;
-	private String comments;
-	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "id_fare")	
-	private Fare addMeterFare;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private String id;
 
-	@OneToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "id_service")
-	private Service service;
-	
-	@Column(name = "max_meters")
-	private double maxMeters;
+    @Temporal( TemporalType.TIMESTAMP)
+	@Column(name="delete_date")
+	private Date deleteDate;
 
-	public long getId() {
+	@Column(name="id_user_insert")
+	private BigInteger idUserInsert;
+
+	@Column(name="id_user_update")
+	private BigInteger idUserUpdate;
+
+	@Column(name="initial_fee")
+	private BigInteger initialFee;
+
+    @Temporal( TemporalType.TIMESTAMP)
+	@Column(name="insert_date")
+	private Date insertDate;
+
+    @Temporal( TemporalType.TIMESTAMP)
+	@Column(name="install_date")
+	private Date installDate;
+
+	@Column(name="meter_price")
+	private double meterPrice;
+
+	private byte paid;
+
+    @Lob()
+	@Column(name="serie_number")
+	private String serieNumber;
+
+	@Column(name="total_fees")
+	private BigInteger totalFees;
+
+    @Temporal( TemporalType.TIMESTAMP)
+	@Column(name="update_date")
+	private Date updateDate;
+
+	//bi-directional many-to-one association to MeterFeeReg
+	@OneToMany(mappedBy="meter")
+	private List<MeterFeeReg> meterFeeRegs;
+
+	//bi-directional one-to-one association to SubsMeter
+	@OneToOne(mappedBy="meter", fetch=FetchType.LAZY)
+	private SubsMeter subsMeter;
+
+	//bi-directional many-to-one association to UsageMeterReg
+	@OneToMany(mappedBy="meter")
+	private List<UsageMeterReg> usageMeterRegs;
+
+    public Meter() {
+    }
+
+	public String getId() {
 		return this.id;
 	}
-	
-	public void setId(long id) {
+
+	public void setId(String id) {
 		this.id = id;
-	}   
-	public Calendar getDateBought() {
-		return this.dateBought;
 	}
 
-	public void setDateBought(Calendar dateBought) {
-		this.dateBought = dateBought;
-	}   
-	public String getSerie() {
-		return this.serie;
+	public Date getDeleteDate() {
+		return this.deleteDate;
 	}
 
-	public void setSerie(String serie) {
-		this.serie = serie;
-	}   
-	public boolean getDeleted() {
-		return this.deleted;
+	public void setDeleteDate(Date deleteDate) {
+		this.deleteDate = deleteDate;
 	}
 
-	public void setDeleted(boolean deleted) {
-		this.deleted = deleted;
-	}   
-	public double getPrice() {
-		return this.price;
+	public BigInteger getIdUserInsert() {
+		return this.idUserInsert;
 	}
 
-	public void setPrice(double price) {
-		this.price = price;
-	}   
-	public double getPayNumber() {
-		return this.payNumber;
+	public void setIdUserInsert(BigInteger idUserInsert) {
+		this.idUserInsert = idUserInsert;
 	}
 
-	public void setPayNumber(double payNumber) {
-		this.payNumber = payNumber;
-	}   
-	public String getComments() {
-		return this.comments;
+	public BigInteger getIdUserUpdate() {
+		return this.idUserUpdate;
 	}
 
-	public void setComments(String comments) {
-		this.comments = comments;
+	public void setIdUserUpdate(BigInteger idUserUpdate) {
+		this.idUserUpdate = idUserUpdate;
 	}
 
-	public Fare getAddMeterFare() {
-		return addMeterFare;
+	public BigInteger getInitialFee() {
+		return this.initialFee;
 	}
 
-	public void setAddMeterFare(Fare addMeterFare) {
-		this.addMeterFare = addMeterFare;
+	public void setInitialFee(BigInteger initialFee) {
+		this.initialFee = initialFee;
 	}
 
-	public double getMaxMeters() {
-		return maxMeters;
+	public Date getInsertDate() {
+		return this.insertDate;
 	}
 
-	public void setMaxMeters(double maxMeters) {
-		this.maxMeters = maxMeters;
+	public void setInsertDate(Date insertDate) {
+		this.insertDate = insertDate;
 	}
 
-	public Service getService() {
-		return service;
+	public Date getInstallDate() {
+		return this.installDate;
 	}
 
-	public void setService(Service service) {
-		this.service = service;
+	public void setInstallDate(Date installDate) {
+		this.installDate = installDate;
 	}
+
+	public double getMeterPrice() {
+		return this.meterPrice;
+	}
+
+	public void setMeterPrice(double meterPrice) {
+		this.meterPrice = meterPrice;
+	}
+
+	public byte getPaid() {
+		return this.paid;
+	}
+
+	public void setPaid(byte paid) {
+		this.paid = paid;
+	}
+
+	public String getSerieNumber() {
+		return this.serieNumber;
+	}
+
+	public void setSerieNumber(String serieNumber) {
+		this.serieNumber = serieNumber;
+	}
+
+	public BigInteger getTotalFees() {
+		return this.totalFees;
+	}
+
+	public void setTotalFees(BigInteger totalFees) {
+		this.totalFees = totalFees;
+	}
+
+	public Date getUpdateDate() {
+		return this.updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public List<MeterFeeReg> getMeterFeeRegs() {
+		return this.meterFeeRegs;
+	}
+
+	public void setMeterFeeRegs(List<MeterFeeReg> meterFeeRegs) {
+		this.meterFeeRegs = meterFeeRegs;
+	}
+	
+	public SubsMeter getSubsMeter() {
+		return this.subsMeter;
+	}
+
+	public void setSubsMeter(SubsMeter subsMeter) {
+		this.subsMeter = subsMeter;
+	}
+	
+	public List<UsageMeterReg> getUsageMeterRegs() {
+		return this.usageMeterRegs;
+	}
+
+	public void setUsageMeterRegs(List<UsageMeterReg> usageMeterRegs) {
+		this.usageMeterRegs = usageMeterRegs;
+	}
+	
 }
