@@ -14,7 +14,7 @@ public abstract class GenericService
 		{
 			em = emf.createEntityManager();
 			em.getTransaction().begin();			
-			em.merge(entity);
+			em.persist(entity);
 			em.getTransaction().commit();			
 		}
 		finally
@@ -35,7 +35,7 @@ public abstract class GenericService
 		{
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
-			entity = GenericEntityTO.getEntity(entity, to);
+			entity = GenericEntityTO.getEntity(entity, to);			
 			em.persist(entity);
 			em.getTransaction().commit();
 			to = GenericEntityTO.getTO(entity, to);

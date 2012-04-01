@@ -5,19 +5,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Página principal</title>
+<title>Página Principal</title>
 </head>
 <body>
 <f:view>
-	<jsp:include page="PrincipalTemplate.jsp"></jsp:include>
+<jsp:include page="PrincipalTemplate.jsp"></jsp:include>
 	<h:form>
 		<center>
 			<h1>Página Principal</h1>
-				<h:panelGrid border="1" columns="1">
-					<h:outputLink value="MastersView.jsp"> Gestión de Maestros</h:outputLink>
+				<h:panelGrid border="1" columns="1">					
 					<h:outputLink value="CustomerManage.jsp">Gestión de Clientes</h:outputLink>
-					<h:outputLink>Gestión de Contadores</h:outputLink>
 					<h:outputLink>Gestión de Servicios</h:outputLink>
+					<h:outputLink>Gestión de Contadores</h:outputLink>					
 					<h:outputLink>Gestión de Consumos</h:outputLink>
 				</h:panelGrid>
 			</center>

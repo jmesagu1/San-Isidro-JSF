@@ -6,11 +6,7 @@ public class UserTypeTO {
 	private String name;
 	
 	private boolean editable;
-	
-	public UserTypeTO() {
-		editable = false;
-	}
- 
+
 	public long getId() {
 		return this.id;
 	}

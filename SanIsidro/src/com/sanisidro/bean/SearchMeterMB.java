@@ -1,8 +1,11 @@
 package com.sanisidro.bean;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import javax.faces.model.SelectItem;
 
 import com.sanisidro.to.MeterTO;
 import com.sanisidro.wrapper.SanIsidroWrapper;
@@ -14,7 +17,7 @@ public class SearchMeterMB {
 	private String strDateFrom;
 	private String strDateTo;
 	private List<MeterTO> meters;
-	private boolean renderTable;
+	private boolean renderTable;	
 	
 	public SearchMeterMB() {
 		serie = "";

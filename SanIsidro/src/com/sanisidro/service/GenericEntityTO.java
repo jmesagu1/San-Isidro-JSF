@@ -10,6 +10,10 @@ public abstract class GenericEntityTO
 {	
 	public static <S, T> T getEntity (T entity, S to) throws Exception
 	{
+		if(to == null)
+		{
+			return null;
+		}
 		Class<? extends Object> cEntity = entity.getClass();
 		Class<? extends Object> cTO = to.getClass();
 		Method [] ms = cTO.getMethods();
@@ -36,6 +40,10 @@ public abstract class GenericEntityTO
 	
 	public static <S, T> S getTO (T entity, S to) throws Exception
 	{
+		if (entity == null)
+		{
+			return null;
+		}
 		Class<? extends Object> cTO = to.getClass();
 		Class<? extends Object> cEntity = entity.getClass();	
 		S ton = (S) cTO.newInstance();

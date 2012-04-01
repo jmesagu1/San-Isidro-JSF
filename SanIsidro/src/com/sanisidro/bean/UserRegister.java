@@ -2,9 +2,7 @@ package com.sanisidro.bean;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.faces.model.SelectItem;
-
 import com.sanisidro.to.UserTO;
 import com.sanisidro.to.UserTypeTO;
 import com.sanisidro.wrapper.SanIsidroWrapper;

@@ -18,13 +18,18 @@ if (session.getAttribute("user") != null)
 		}
 		else
 		{
-			p = "UserHome.jsp";
+			p = "HomeUser.jsp";
 		}
 	
 	%>
 	<a href="<%= p %>">Página Principal</a>
 	</div>
 	<%
+	}
+	else
+	{
+		response.sendRedirect("/LoginRequired.jsp");
+		return;				
 	}
  %>
 
