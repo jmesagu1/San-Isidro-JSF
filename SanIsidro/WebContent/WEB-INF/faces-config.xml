@@ -2,112 +2,28 @@
 
 <faces-config
     xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
-    version="2.0">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+	version="2.0">
+
 	<converter>
 		<display-name>Date Converter</display-name>
 		<converter-id>dateConverter</converter-id>
 		<converter-class>com.sanisidro.converter.DateConverter</converter-class>
 	</converter>
-	<managed-bean>
-		<managed-bean-name>createZoneMB</managed-bean-name>
-		<managed-bean-class>com.sanisidro.bean.CreateZoneMB</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>serviceTypeMB</managed-bean-name>
-		<managed-bean-class>com.sanisidro.bean.AdminServiceTypeMB</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>userTypeMB</managed-bean-name>
-		<managed-bean-class>com.sanisidro.bean.AdminUserTypeMB</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>faresMB</managed-bean-name>
-		<managed-bean-class>com.sanisidro.bean.AdminFaresMB</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>serviceFareUserMB</managed-bean-name>
-		<managed-bean-class>com.sanisidro.bean.AdminServiceFareUserMB</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>login</managed-bean-name>
-		<managed-bean-class>com.sanisidro.bean.Login</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>searchMeterMB</managed-bean-name>
-		<managed-bean-class>com.sanisidro.bean.SearchMeterMB</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>metersByUserMB</managed-bean-name>
-		<managed-bean-class>com.sanisidro.bean.SearchMeterByUserMB</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>meterByServiceMB</managed-bean-name>
-		<managed-bean-class>com.sanisidro.bean.SearchMeterByServiceMB</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>serviceStatusMB</managed-bean-name>
-		<managed-bean-class>com.sanisidro.bean.AdminServiceStatusMB</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>createMeterMB</managed-bean-name>
-		<managed-bean-class>com.sanisidro.bean.CreateMeterMB</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>userRegister</managed-bean-name>
-		<managed-bean-class>com.sanisidro.bean.UserRegister</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>registerUseMeter</managed-bean-name>
-		<managed-bean-class>com.sanisidro.bean.RegisterUseMeter</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>searchCustomerMB</managed-bean-name>
-		<managed-bean-class>com.sanisidro.bean.SearchCustomerMB</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>registerUseChargesMB</managed-bean-name>
-		<managed-bean-class>com.sanisidro.annotation.RegisterUseChargesMB</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
+
 	<navigation-rule>
-		<display-name>Login</display-name>
-		<from-view-id>/Login.jsp</from-view-id>
+		<from-view-id>/pages/inputname.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>admin</from-outcome>
-			<to-view-id>/HomeAdmin.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>RegisterCustomer</display-name>
-		<from-view-id>/RegisterCustomer.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>success</from-outcome>
-			<to-view-id>/SuccessPage.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>RegisterUseMeter</display-name>
-		<from-view-id>/RegisterUseMeter.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>success</from-outcome>
-			<to-view-id>/SuccessPage.jsp</to-view-id>
+			<from-outcome>greeting</from-outcome>
+			<to-view-id>/pages/greeting.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
+    <application>
+        <resource-bundle>
+            <base-name>resources</base-name>
+            <var>msgs</var>
+        </resource-bundle>
+    </application>
 </faces-config>

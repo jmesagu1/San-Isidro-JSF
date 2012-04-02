@@ -27,7 +27,7 @@
 		<class>com.sanisidro.entity.User</class>
 		<class>com.sanisidro.entity.Zone</class>
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.43.72/sanisidrodb"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/sanisidrodb"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>
 			<!-- 
 				<property name="javax.persistence.jdbc.password" value="oTtbp@va3_Nl"/>
