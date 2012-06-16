@@ -13,7 +13,7 @@ public abstract class GenericService
 		try
 		{
 			em = emf.createEntityManager();
-			em.getTransaction().begin();			
+			em.getTransaction().begin();		
 			em.persist(entity);
 			em.getTransaction().commit();			
 		}
@@ -45,11 +45,11 @@ public abstract class GenericService
 			if (em != null)
 			{
 				em.close();
-			}			
+			}
 		}
 		return to;	
 	}
-	
+
 	public static <S> S find (Object entity, S to, Object pk)throws Exception
 	{
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("SanIsidro");

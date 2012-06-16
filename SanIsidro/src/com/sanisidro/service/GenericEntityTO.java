@@ -55,6 +55,7 @@ public abstract class GenericEntityTO
 		return entity;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private static <S, T> S getTO (T entity, Class<S> toClass, Map<Object, Object> instances) throws Exception
 	{
 		if (entity == null)
@@ -65,7 +66,7 @@ public abstract class GenericEntityTO
 		if (instances.containsKey(entity))
 		{
 			return (S) instances.get(cEntity);
-		} 
+		}
 		else 
 		{
 			S ton = toClass.newInstance();
@@ -89,7 +90,7 @@ public abstract class GenericEntityTO
 						}
 						else
 						{
-							Object subTO = getTO(subE, cSubTO);
+							Object subTO = getTO(subE, cSubTO, instances);
 							toClass.getMethod(name, cSubTO).invoke(ton, new Object [] {subTO});	
 						}
 					} 
@@ -101,14 +102,17 @@ public abstract class GenericEntityTO
 							ParameterizedType listType = (ParameterizedType) field.getGenericType();
 					        Class<? extends Object> cSubTO = (Class<? extends Object>) listType.getActualTypeArguments()[0];
 							Collection subEntities =  (Collection) ms[i].invoke(entity, new Object[]{});
-							Collection<Object> subTOs = subEntities.getClass().newInstance();
-							Iterator iter = subEntities.iterator();
-							while (iter.hasNext()) 
-							{								
-								Object subTO = getTO(iter.next(), cSubTO, instances);
-								subTOs.add(subTO);
+							if (subEntities != null)
+							{
+								Collection<Object> subTOs = subEntities.getClass().newInstance();
+								Iterator iter = subEntities.iterator();
+								while (iter.hasNext()) 
+								{								
+									Object subTO = getTO(iter.next(), cSubTO, instances);
+									subTOs.add(subTO);
+								}
+								toClass.getMethod(name, List.class).invoke(ton, new Object [] { subTOs });
 							}
-							toClass.getMethod(name, List.class).invoke(ton, new Object [] { subTOs });
 						} 
 						else 
 						{
