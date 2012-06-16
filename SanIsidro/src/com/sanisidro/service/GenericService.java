@@ -37,8 +37,8 @@ public abstract class GenericService
 			em.getTransaction().begin();
 			entity = GenericEntityTO.getEntity(entity, to);			
 			em.persist(entity);
-			em.getTransaction().commit();
-			to = GenericEntityTO.getTO(entity, to);
+			em.getTransaction().commit();			
+			to = GenericEntityTO.getTO(entity, (Class<S>)to.getClass());
 		}
 		finally
 		{
@@ -72,7 +72,7 @@ public abstract class GenericService
 		}
 		else
 		{
-			return GenericEntityTO.getTO(entity, to);
+			return GenericEntityTO.getTO(entity, (Class<S>)to.getClass());
 		}
 	}	
 	
@@ -95,7 +95,7 @@ public abstract class GenericService
 				em.close();
 			}
 		}
-		return GenericEntityTO.getTO(entity, to);
+		return GenericEntityTO.getTO(entity, (Class<S>)to.getClass());
 	}
 	
 	public static <T> void delete (Object entity, T to) throws  Exception

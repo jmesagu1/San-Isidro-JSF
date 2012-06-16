@@ -21,7 +21,7 @@ public class ZoneService {
         List<Zone> zones = query.getResultList();
         List<ZoneTO> result = new ArrayList<ZoneTO>();
         for (Zone zone : zones) {
-			result.add(GenericEntityTO.getTO(zone, new ZoneTO()));
+			result.add(GenericEntityTO.getTO(zone, ZoneTO.class));
 		}
     	if (em != null) {
     		em.close();
