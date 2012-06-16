@@ -17,7 +17,6 @@ public class RichBean implements Serializable {
     @PostConstruct
     public void postContruct() {
         name = "Luis";
-        System.out.println("Name: " + name);
     }
 
     public String getName() {
