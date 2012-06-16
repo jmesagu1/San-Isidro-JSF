@@ -1,22 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-  <display-name>SanIsidro</display-name>
-  <servlet>
-    <servlet-name>Faces Servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.jsf</url-pattern>
-    <url-pattern>/faces/*</url-pattern>
-  </servlet-mapping>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+ <display-name>SanIsidro</display-name>
+ <listener>
+ 	<description>
+ 	Used to cleanup when a session is destroyed</description>
+ 	<display-name>ZK Session cleaner</display-name>
+ 	<listener-class>org.zkoss.zk.ui.http.HttpSessionListener</listener-class>
+ </listener>
+ <servlet>
+  <servlet-name>Faces Servlet</servlet-name>
+  <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+  <load-on-startup>1</load-on-startup>
+ </servlet>
+ <servlet>
+ 	<description>
+ 	The ZK loader for ZUML pages</description>
+ 	<servlet-name>zkLoader</servlet-name>
+ 	<servlet-class>org.zkoss.zk.ui.http.DHtmlLayoutServlet</servlet-class>
+ 	<init-param>
+ 		<param-name>update-uri</param-name>
+ 		<param-value>/zkau</param-value>
+ 	</init-param>
+ 	<load-on-startup>1</load-on-startup>
+ </servlet>
+ <servlet>
+ 	<description>
+ 	The asynchronous update engine for ZK</description>
+ 	<servlet-name>auEngine</servlet-name>
+ 	<servlet-class>org.zkoss.zk.au.http.DHtmlUpdateServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>Faces Servlet</servlet-name>
+  <url-pattern>*.jsf</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>zkLoader</servlet-name>
+ 	<url-pattern>*.zul</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>zkLoader</servlet-name>
+ 	<url-pattern>*.zhtml</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>auEngine</servlet-name>
+ 	<url-pattern>/zkau/*</url-pattern>
+ </servlet-mapping>
+ <welcome-file-list>
+  <welcome-file>index.jsf</welcome-file>
+  <welcome-file>index.zul</welcome-file>
+ </welcome-file-list>
+ <security-constraint>
+  <display-name>Security</display-name>
+  <web-resource-collection>
+   <web-resource-name>Protected Area</web-resource-name>
+   <url-pattern>/pr/*</url-pattern>
+   <http-method>DELETE</http-method>
+   <http-method>GET</http-method>
+   <http-method>POST</http-method>
+   <http-method>PUT</http-method>
+  </web-resource-collection>
+  <auth-constraint>
+   <role-name>user</role-name>
+  </auth-constraint>
+  <user-data-constraint>
+  	<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+  </user-data-constraint>
+ </security-constraint>
+ <login-config>
+  <auth-method>FORM</auth-method>
+  <realm-name>Form-based Auth</realm-name>
+  <form-login-config>
+   <form-login-page>/login/login.jsp</form-login-page>
+   <form-error-page>/login/errorlogin.jsp</form-error-page>
+  </form-login-config>
+ </login-config>
+ <security-role>
+  <role-name>user</role-name>
+ </security-role>
 </web-app>
